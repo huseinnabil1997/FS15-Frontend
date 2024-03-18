@@ -1,1 +1,0 @@
-console.log('initial init for frontend')
