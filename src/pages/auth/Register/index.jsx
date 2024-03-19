@@ -1,11 +1,22 @@
 import React, { useState } from 'react';
-import './index.css';
+import './register.css';
 import Header from '../../../components/Header';
 import * as Yup from 'yup';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
 
 const Register = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: '',
+    confirm_password: ''
+  });
+  const [errors, setErrors] = useState({
+    name: '',
+    email: '',
+    password: '',
+    confirm_password: ''
+  });
+
   const validationSchema = Yup.object().shape({
     name: Yup.string().required('Name is required'),
     email: Yup.string().email('Invalid email').required('Email is required'),
@@ -15,13 +26,34 @@ const Register = () => {
       .required('Please confirm your password'),
   });
 
-  const { register, handleSubmit, formState: { errors } } = useForm({
-    resolver: yupResolver(validationSchema)
-  });
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+  };
 
-  const onSubmit = (data) => {
-    // Handle form submission
-    console.log(data);
+  const onSubmit = (e) => {
+    e.preventDefault();
+    validationSchema.validate(formData, { abortEarly: false })
+      .then(() => {
+        // Handle form submission
+        console.log(formData);
+        setErrors({
+          name: '',
+          email: '',
+          password: '',
+          confirm_password: ''
+        });
+      })
+      .catch((err) => {
+        const newErrors = {};
+        err.inner.forEach(error => {
+          newErrors[error.path] = error.message;
+        });
+        setErrors(newErrors);
+      });
   };
 
   return (
@@ -34,16 +66,17 @@ const Register = () => {
         <div className="brief-text">
           Please register first
         </div>
-        <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
+        <form className="login-form" onSubmit={onSubmit}>
           <div className="form-group">
             <input
               type="text"
               id="name"
               name="name"
               placeholder='Name'
-              {...register('name')}
+              value={formData.name}
+              onChange={handleChange}
             />
-            {errors.name && <p className="error-message">{errors.name.message}</p>}
+            {errors.name && <p className="error-message">{errors.name}</p>}
           </div>
           <div className="form-group">
             <input
@@ -51,9 +84,10 @@ const Register = () => {
               id="email"
               name="email"
               placeholder='Email'
-              {...register('email')}
+              value={formData.email}
+              onChange={handleChange}
             />
-            {errors.email && <p className="error-message">{errors.email.message}</p>}
+            {errors.email && <p className="error-message">{errors.email}</p>}
           </div>
           <div className="form-group">
             <input
@@ -61,9 +95,10 @@ const Register = () => {
               id="password"
               name="password"
               placeholder='Password'
-              {...register('password')}
+              value={formData.password}
+              onChange={handleChange}
             />
-            {errors.password && <p className="error-message">{errors.password.message}</p>}
+            {errors.password && <p className="error-message">{errors.password}</p>}
           </div>
           <div className="form-group">
             <input
@@ -71,11 +106,12 @@ const Register = () => {
               id="confirm_password"
               name="confirm_password"
               placeholder='Confirm Password'
-              {...register('confirm_password')}
+              value={formData.confirm_password}
+              onChange={handleChange}
             />
-            {errors.confirm_password && <p className="error-message">{errors.confirm_password.message}</p>}
+            {errors.confirm_password && <p className="error-message">{errors.confirm_password}</p>}
           </div>
-          <div className="btn-container">
+          <div className="button_signup">
             <button className="btn" type="submit">Sign Up</button>
           </div>
         </form>

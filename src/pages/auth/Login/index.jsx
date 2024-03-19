@@ -1,23 +1,51 @@
 import React, { useState } from 'react';
-import './index.css';
+import './login.css';
 import Header from '../../../components/Header';
 import * as Yup from 'yup';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
 
 const Login = () => {
+  const [formData, setFormData] = useState({
+    email: '',
+    password: ''
+  });
+  const [errors, setErrors] = useState({
+    email: '',
+    password: ''
+  });
+
+  console.log(formData)
+
   const validationSchema = Yup.object().shape({
     email: Yup.string().email('Invalid email').required('Email is required'),
     password: Yup.string().required('Password is required'),
   });
 
-  const { register, handleSubmit, formState: { errors } } = useForm({
-    resolver: yupResolver(validationSchema)
-  });
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+  };
 
-  const onSubmit = (data) => {
-    // Handle form submission
-    console.log(data);
+  const onSubmit = (e) => {
+    e.preventDefault();
+    validationSchema.validate(formData, { abortEarly: false })
+      .then(() => {
+        // Handle form submission
+        console.log(formData);
+        setErrors({
+          email: '',
+          password: ''
+        });
+      })
+      .catch((err) => {
+        const newErrors = {};
+        err.inner.forEach(error => {
+          newErrors[error.path] = error.message;
+        });
+        setErrors(newErrors);
+      });
   };
 
   return (
@@ -30,16 +58,17 @@ const Login = () => {
         <div className="brief-text">
           Please login first
         </div>
-        <form className="login-form" onSubmit={handleSubmit(onSubmit)}>
+        <form className="login-form" onSubmit={onSubmit}>
           <div className="form-group">
             <input
               type="text"
               id="email"
               name="email"
               placeholder='Email'
-              {...register('email')}
+              value={formData.email}
+              onChange={handleChange}
             />
-            {errors.email && <p className="error-message">{errors.email.message}</p>}
+            {errors.email && <p className="error-message">{errors.email}</p>}
           </div>
           <div className="form-group">
             <input
@@ -47,14 +76,15 @@ const Login = () => {
               id="password"
               name="password"
               placeholder='Password'
-              {...register('password')}
+              value={formData.password}
+              onChange={handleChange}
             />
-            {errors.password && <p className="error-message">{errors.password.message}</p>}
+            {errors.password && <p className="error-message">{errors.password}</p>}
           </div>
           <div className="brief-text">
             Forgot Password? <span>Click Here</span>
           </div>
-          <div className="btn-container">
+          <div className="button_login">
             <button className="btn" type="submit">Login</button>
           </div>
         </form>

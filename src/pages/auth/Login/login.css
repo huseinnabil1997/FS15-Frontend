@@ -62,7 +62,7 @@ input {
   border-color: #CFD6E5;
 }
 
-.btn-container {
+.button_login {
   display: flex;
   justify-content: flex-end;
   width: 630px;
