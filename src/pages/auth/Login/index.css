@@ -65,7 +65,7 @@ input {
 .btn-container {
   display: flex;
   justify-content: flex-end;
-  width: 650px;
+  width: 630px;
 }
 
 button.btn {
