@@ -2,7 +2,7 @@ import React from 'react';
 import './index.css';
 import Logo from '../../assets/logo.png'
 
-const Header = () => {
+const Header = ({ confirmSucces = false }) => {
   return (
     <header className="header">
       <div className="logo">
@@ -10,8 +10,12 @@ const Header = () => {
         <span>Otomobil</span>
       </div>
       <div className="nav">
-        <button className="btn-signup">Sign Up</button>
-        <button className="login">Login</button>
+        {!confirmSucces && (
+          <>
+            <button className="btn-signup">Sign Up</button>
+            <button className="login">Login</button>
+          </>
+        )}
       </div>
     </header>
   );
