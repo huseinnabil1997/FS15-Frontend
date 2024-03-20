@@ -36,6 +36,8 @@
 
 .nav {
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .login {
@@ -83,4 +85,50 @@
 
 .btn-signup:hover {
   opacity: 0.5;
+}
+
+.button_header {
+  font-family: Montserrat;
+  width: 110px;
+  height: 40px;
+  gap: 10px;
+  border-radius: 8px;
+  opacity: 1;
+  background-color: white;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 19.5px;
+  text-align: center;
+  color: #790B0A;
+  transition: opacity 0.3s;
+  border: none;
+  font-size: 16px;
+  background: none;
+}
+
+.button_header:hover {
+  opacity: 0.5;
+}
+
+.icon_button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.icon_button img {
+  width: 16px; /* Adjust size as needed */
+  height: 16px; /* Adjust size as needed */
+}
+
+.icon_button:focus {
+  outline: none;
+}
+
+.separator {
+  width: 1px;
+  height: 30px; /* Adjust height as needed */
+  background-color: #ccc; /* Adjust color as needed */
+  margin-left: 10px; /* Adjust margin as needed */
+  background-color: #790B0A;
 }
