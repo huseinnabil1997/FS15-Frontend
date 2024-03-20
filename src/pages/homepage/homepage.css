@@ -1,0 +1,259 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+.backgroundContainer {
+  background-image: url('../../assets/driving_lessons.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 496px;
+  width: 100%;
+  min-width: 1280px;
+  max-width: 1366px;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  top: 86px;
+  position: absolute;
+}
+
+.textOverlay {
+  width: 100%;
+  text-align: center;
+  color: white;
+  margin-top: 50px;
+}
+
+.lessonTitle {
+  font-family: Montserrat;
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 39.01px;
+  text-align: center;
+}
+
+.lessonSubtitle {
+  font-family: Montserrat;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 29.26px;
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 60px;
+}
+
+.dataLessonContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+}
+
+.boxLesson {
+  width: Hug (324px)px;
+  height: Hug (207px)px;
+  padding: 16px;
+  gap: 31px;
+  border-radius: 20px;
+}
+
+.boxLesson p {
+  width: 292px;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 19.5px;
+  text-align: center;
+}
+
+.boxLesson h1 {
+  font-family: Montserrat;
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 58.51px;
+  text-align: center;
+  height: 59px;
+}
+
+.joinCourseBox {
+  width: 100%;
+  height: 1050px;
+  display: flex;
+  text-align: center;
+  color: #790B0A;
+  position: absolute;
+  top: 600px;
+  flex-direction: column;
+}
+
+.joinCourseBox h1 {
+  font-family: Montserrat;
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 39.01px;
+}
+
+.boxListContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  /* 3 columns */
+  grid-template-rows: repeat(2, 1fr);
+  /* 2 rows */
+  gap: 10px;
+  margin: 50px 100px;
+}
+
+.boxList {
+  padding: 20px;
+  border-radius: 5px;
+  text-align: left;
+  width: 350px;
+  height: 400px;
+  background-color: white;
+}
+
+.carCategory {
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19.5px;
+  text-align: left;
+  color: #828282;
+}
+
+.boxList h2 {
+  font-family: Montserrat;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 21.94px;
+  text-align: left;
+  margin-bottom: 50px;
+  color: #333333;
+}
+
+.carPrice {
+  font-family: Montserrat;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 24.38px;
+  text-align: left;
+  color: #790B0A;
+}
+
+.benefitContainer {
+  width: 100%;
+  height: 375px;
+  display: flex;
+  text-align: center;
+  color: #790B0A;
+  position: absolute;
+  top: 1700px;
+  flex-direction: row;
+}
+
+.benefitTextContainer {
+  width: 61%;
+  height: auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+
+.benefitTextContainer h1 {
+  font-family: Montserrat;
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 48.76px;
+  text-align: left;
+  padding-left: 100px;
+  color: #790B0A;
+}
+
+.benefitTextContainer p {
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 19.5px;
+  text-align: justify;
+  color: #333333;
+  width: 711px;
+  margin-left: 100px;
+}
+
+.benefitImageContainer {
+  width: 39%;
+  height: auto;
+}
+
+.benefitImageContainer img {
+  width: 373.33px;
+  height: 280px;
+  position: absolute;
+  bottom: 0;
+  right: 70px;
+}
+
+.boxImageTop {
+  width: 441px;
+  height: 40px;
+  background-color: #790B0A;
+  position: absolute;
+  right: 0;
+  top: 150px;
+}
+
+.boxImageBottom {
+  width: 441px;
+  height: 101px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: #790B0A;
+  ;
+}
+
+.moreCarType {
+  width: 100%;
+  height: 500px;
+  display: flex;
+  text-align: center;
+  color: #790B0A;
+  position: absolute;
+  top: 2200px;
+  flex-direction: column;
+}
+
+.moreCarType h1 {
+  font-family: Inter;
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 38.73px;
+  text-align: center;
+}
+
+.moreCarType .boxListContainer {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  /* 3 columns */
+  grid-template-rows: repeat(2, 1fr);
+  /* 2 rows */
+  gap: 10px;
+  margin: 50px 100px;
+}
+
+.moreCarType .boxList {
+  width: 200px;
+  height: 119.67px;
+  gap: 24px;
+  text-align: center;
+}
+
+.moreCarType h2 {
+  font-family: Inter;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 29.05px;
+  text-align: center;
+}

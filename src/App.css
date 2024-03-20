@@ -1,8 +1,16 @@
+#root {
+  /* max-width: 1366px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center; */
+  height: auto;
+}
 /* #root {
-  max-width: 1280px;
+  max-width: 1366px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  height: 200vh;
 }
 
 .logo {
