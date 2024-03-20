@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from '../../components/Header';
+import Footer from '../../components/Footer';
 import KijangInova from '../../assets/kijang_inova.png'
 import HondaBrio from '../../assets/honda_brio.png'
 import HyundaiPalisade from '../../assets/hyundai_palisade.png'
@@ -107,7 +108,7 @@ const Homepage = () => {
   ];
   return (
     <>
-      <Header homePage />
+      <Header />
       <div className="backgroundContainer">
         <div className="textOverlay">
           <div className='lessonTitle'>We provide driving lessons for various types of cars</div>
@@ -170,6 +171,9 @@ const Homepage = () => {
             </div>
           ))}
         </div>
+      </div>
+      <div className='footerHomePage'>
+        <Footer />
       </div>
     </>
   );

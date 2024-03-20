@@ -257,3 +257,17 @@
   line-height: 29.05px;
   text-align: center;
 }
+
+.footerHomePage {
+  position: absolute;
+  top: 2800px;
+  width: 100%;
+  margin: 0;
+  left: 0px;
+  margin-left: 0;
+  z-index: 1000;
+  display: flex;
+  background-color: white;
+  height: 220px;
+  border-top: 1px solid #E0E0E0
+}
