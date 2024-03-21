@@ -7,12 +7,13 @@ import Footer from './components/Footer'
 import ForgotPassword from './pages/auth/ForgotPassword'
 import NewPassword from './pages/auth/NewPassword'
 import './App.css'
+import MenuClass from './pages/MenuClass'
 
 
 function App() {
   return (
     <>
-      <NewPassword />
+      <MenuClass />
     </>
   )
 }
