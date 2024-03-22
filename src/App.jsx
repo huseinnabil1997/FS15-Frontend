@@ -13,7 +13,7 @@ import MenuClass from './pages/MenuClass'
 function App() {
   return (
     <>
-      <MenuClass />
+      <Homepage />
     </>
   )
 }

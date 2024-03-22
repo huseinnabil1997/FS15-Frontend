@@ -9,7 +9,7 @@
   height: 496px;
   width: 100%;
   min-width: 1280px;
-  max-width: 1366px;
+  max-width: 100%;
   z-index: 1000;
   display: flex;
   justify-content: space-between;
