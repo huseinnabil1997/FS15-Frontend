@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './login.css';
 import Header from '../../../components/Header';
 import * as Yup from 'yup';
+import { useHistory, Link } from 'react-router-dom';
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -13,7 +14,7 @@ const Login = () => {
     password: ''
   });
 
-  console.log(formData)
+  const history = useHistory();
 
   const validationSchema = Yup.object().shape({
     email: Yup.string().email('Invalid email').required('Email is required'),
@@ -32,12 +33,13 @@ const Login = () => {
     e.preventDefault();
     validationSchema.validate(formData, { abortEarly: false })
       .then(() => {
-        // Handle form submission
         console.log(formData);
         setErrors({
           email: '',
           password: ''
         });
+
+        history.push('/?isHomepage=true');
       })
       .catch((err) => {
         const newErrors = {};
@@ -82,14 +84,14 @@ const Login = () => {
             {errors.password && <p className="error-message">{errors.password}</p>}
           </div>
           <div className="brief-text">
-            Forgot Password? <span>Click Here</span>
+            Forgot Password? <Link to="/forgot-password"><span>Click Here</span></Link>
           </div>
           <div className="button_login">
             <button className="btn" type="submit">Login</button>
           </div>
         </form>
         <div className="signup-text">
-          Don't have an account?<span>Sign Up here</span>
+          Don't have an account?<Link to="/register"><span>Sign Up here</span></Link>
         </div>
       </div>
     </>
