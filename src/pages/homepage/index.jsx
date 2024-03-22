@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import KijangInova from '../../assets/kijang_inova.png'
@@ -21,6 +22,7 @@ import Truck from '../../assets/truck.png'
 
 const Homepage = () => {
   const location = useLocation();
+  const history = useHistory();
   const searchParams = new URLSearchParams(location.search);
   const isHomepage = searchParams.get('isHomepage');
   const miniBoxes = [
@@ -167,7 +169,7 @@ const Homepage = () => {
         <h1>Join us for the course</h1>
         <div className='boxListContainer'>
           {miniBoxes.map(({ img, category, name, price }) => (
-            <div className="boxList" key={img}>
+            <div className="boxList" key={img} onClick={() => history.push(`/menu-class?name=${name}`)}>
               <img src={img} alt={name} />
               <h2>{name}</h2>
               <p className='carPrice'>{price}</p>
