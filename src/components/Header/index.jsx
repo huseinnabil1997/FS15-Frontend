@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import './index.css';
 import Logo from '../../assets/logo.png';
 import Cart from '../../assets/cart.png';
@@ -7,6 +7,7 @@ import User from '../../assets/user.png';
 import Logout from '../../assets/logout.png';
 
 const Header = ({ confirmSucces = false, homePage = false }) => {
+  const history = useHistory();
   return (
     <header className="header">
       <div className="logo">
@@ -35,7 +36,7 @@ const Header = ({ confirmSucces = false, homePage = false }) => {
             <button className="icon_button" style={{ marginLeft: 20, marginRight: 20 }} onClick={() => console.log("User clicked")}>
               <img src={User} alt="User" />
             </button>
-            <button className="icon_button" style={{ marginRight: 20 }} onClick={() => console.log("Logout clicked")}>
+            <button className="icon_button" style={{ marginRight: 20 }} onClick={() => history.push("/login")}>
               <img src={Logout} alt="Logout" />
             </button>
           </>
