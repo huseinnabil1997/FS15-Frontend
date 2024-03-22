@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './newPassword.css';
 import Header from '../../../components/Header';
 import * as Yup from 'yup';
+import { Link, useHistory } from 'react-router-dom';
 
 const NewPassword = () => {
   const [formData, setFormData] = useState({
@@ -13,14 +14,16 @@ const NewPassword = () => {
     confirmNewPassword: '',
   });
 
-  console.log(formData)
+  console.log(formData);
 
   const validationSchema = Yup.object().shape({
-    newPassword: Yup.string().required('New Password is required'),
+    newPassword: Yup.string().required('New Password is required').min(6, 'Password must be at least 6 characters'),
     confirmNewPassword: Yup.string()
       .oneOf([Yup.ref('newPassword'), null], 'Passwords must match')
       .required('Confirm New Password is required'),
   });
+
+  const history = useHistory();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -34,12 +37,12 @@ const NewPassword = () => {
     e.preventDefault();
     validationSchema.validate(formData, { abortEarly: false })
       .then(() => {
-        // Handle form submission
         console.log(formData);
         setErrors({
           newPassword: '',
           confirmNewPassword: '',
         });
+        history.push('/login');
       })
       .catch((err) => {
         const newErrors = {};
@@ -81,7 +84,7 @@ const NewPassword = () => {
             {errors.confirmNewPassword && <p className="error-message">{errors.confirmNewPassword}</p>}
           </div>
           <div className="button_login">
-            <button style={{marginRight: 20}} className="btn_cancel" type="button">Cancel</button>
+            <Link to="/login"><button style={{marginRight: 20}} className="btn_cancel" type="button">Cancel</button></Link>
             <button className="btn" type="submit">Submit</button>
           </div>
         </form>

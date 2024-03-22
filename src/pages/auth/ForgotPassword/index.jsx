@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './forgotPassword.css';
 import Header from '../../../components/Header';
 import * as Yup from 'yup';
+import { Link, useHistory } from 'react-router-dom';
 
 const ForgotPassword = () => {
   const [formData, setFormData] = useState({
@@ -10,6 +11,8 @@ const ForgotPassword = () => {
   const [errors, setErrors] = useState({
     email: '',
   });
+
+  const history = useHistory();
 
   console.log(formData)
 
@@ -34,6 +37,7 @@ const ForgotPassword = () => {
         setErrors({
           email: '',
         });
+        history.push('/new-password');
       })
       .catch((err) => {
         const newErrors = {};
@@ -67,8 +71,10 @@ const ForgotPassword = () => {
             {errors.email && <p className="error-message">{errors.email}</p>}
           </div>
           <div className="button_login">
-            <button style={{marginRight: 20}} className="btn_cancel" type="submit">Cancel</button>
-            <button className="btn" type="submit">Login</button>
+            <Link to="/login">
+              <button style={{ marginRight: 20 }} className="btn_cancel" type="submit">Cancel</button>
+            </Link>
+            <button className="btn" type="submit">Confirm</button>
           </div>
         </form>
       </div>
