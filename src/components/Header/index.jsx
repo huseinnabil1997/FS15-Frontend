@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './index.css';
 import Logo from '../../assets/logo.png';
 import Cart from '../../assets/cart.png';
@@ -15,8 +16,12 @@ const Header = ({ confirmSucces = false, homePage = false }) => {
       <div className="nav">
         {!confirmSucces && !homePage && (
           <>
-            <button className="btn-signup">Sign Up</button>
-            <button className="login">Login</button>
+            <Link to="/register">
+              <button className="btn-signup">Sign Up</button>
+            </Link>
+            <Link to="/login">
+              <button className="login">Login</button>
+            </Link>
           </>
         )}
         {homePage && (

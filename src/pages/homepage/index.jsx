@@ -9,7 +9,7 @@ import DumpTruck from '../../assets/dump_truck.png'
 import HondaCivic from '../../assets/honda_civic.png'
 import Benefit from '../../assets/benefit.png'
 import './homepage.css';
-
+import { useLocation } from 'react-router-dom';
 import Electric from '../../assets/electric.png'
 import Hatchback from '../../assets/hatchback.png'
 import Lcgc from '../../assets/lcgc.png'
@@ -20,6 +20,9 @@ import Suv from '../../assets/suv.png'
 import Truck from '../../assets/truck.png'
 
 const Homepage = () => {
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const isHomepage = searchParams.get('isHomepage');
   const miniBoxes = [
     {
       id: 1,
@@ -108,7 +111,7 @@ const Homepage = () => {
   ];
   return (
     <>
-      <Header />
+      <Header homePage={isHomepage}/>
       <div className="backgroundContainer">
         <div className="textOverlay">
           <div className='lessonTitle'>We provide driving lessons for various types of cars</div>

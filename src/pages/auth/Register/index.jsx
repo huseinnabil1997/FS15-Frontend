@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './register.css';
 import Header from '../../../components/Header';
 import * as Yup from 'yup';
+import { Link, useHistory } from 'react-router-dom';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -16,6 +17,8 @@ const Register = () => {
     password: '',
     confirm_password: ''
   });
+
+  const history = useHistory();
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().required('Name is required'),
@@ -38,7 +41,6 @@ const Register = () => {
     e.preventDefault();
     validationSchema.validate(formData, { abortEarly: false })
       .then(() => {
-        // Handle form submission
         console.log(formData);
         setErrors({
           name: '',
@@ -46,6 +48,8 @@ const Register = () => {
           password: '',
           confirm_password: ''
         });
+
+        history.push('/confirm-success');
       })
       .catch((err) => {
         const newErrors = {};
@@ -61,7 +65,7 @@ const Register = () => {
       <Header />
       <div className="login-container">
         <div className="welcome-text">
-          Lets Join our course!
+          Let's Join our course!
         </div>
         <div className="brief-text">
           Please register first
@@ -116,7 +120,7 @@ const Register = () => {
           </div>
         </form>
         <div className="signup-text">
-          Have an account? <span>Login here</span>
+          Have an account? <Link to="/login"><span>Login here</span></Link>
         </div>
       </div>
     </>
