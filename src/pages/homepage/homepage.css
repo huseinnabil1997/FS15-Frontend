@@ -260,7 +260,7 @@
 
 .footerHomePage {
   position: absolute;
-  top: 2800px;
+  /* top: 2800px; */
   width: 100%;
   margin: 0;
   left: 0px;

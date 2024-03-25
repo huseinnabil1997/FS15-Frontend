@@ -18,6 +18,7 @@ import Offroad from '../../assets/offroad.png'
 import Sedan from '../../assets/sedan.png'
 import Suv from '../../assets/suv.png'
 import Truck from '../../assets/truck.png'
+import { Stack, Typography } from '@mui/material';
 
 const Homepage = () => {
   const location = useLocation();
@@ -111,7 +112,7 @@ const Homepage = () => {
   ];
   return (
     <>
-      <Header homePage={isHomepage}/>
+      <Header homePage={isHomepage} />
       <div className="backgroundContainer">
         <div className="textOverlay">
           <div className='lessonTitle'>We provide driving lessons for various types of cars</div>
@@ -163,21 +164,21 @@ const Homepage = () => {
           <div style={{ zIndex: -1 }} className='boxImageBottom' />
         </div>
       </div>
-      <div className="moreCarType">
-        <h1>Join us for the course</h1>
-        <div className='boxListContainer'>
+      <Stack spacing={2} className="moreCarType">
+        <Typography variant="h1">Join us for the course</Typography>
+        <Stack direction={{ xs: 'column', md: 'row' }} spacing={2} useFlexGap flexWrap="wrap" padding={20}>
           {miniBoxes.map(({ img, category, name, price }) => (
-            <div className="boxList" key={img}>
+            <Stack key={img} className="boxList" alignItems="center">
               <img src={img} alt={name} />
-              <h2>{name}</h2>
-              <p className='carPrice'>{price}</p>
-            </div>
+              <Typography variant="h2">{name}</Typography>
+              <Typography variant="body1" className='carPrice'>{price}</Typography>
+            </Stack>
           ))}
-        </div>
-      </div>
-      <div className='footerHomePage'>
+        </Stack>
+      </Stack>
+      <Stack top={{ xs: '3900px', md: '3400px' }} className='footerHomePage'>
         <Footer />
-      </div>
+      </Stack>
     </>
   );
 };
