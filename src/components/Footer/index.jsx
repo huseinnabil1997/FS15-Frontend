@@ -35,7 +35,7 @@ function Footer() {
     'Truck'
   ];
   return (
-    <Stack direction={{ xs: 'column', md: 'row' }}>
+    <Stack border={1} borderColor="#E0E0E0" direction={{ xs: 'column', md: 'row' }}>
       <Stack width="41%" sx={{ p: 3 }} spacing={3}>
         <Typography {...typographyStyles.title}>About Us</Typography>
         <Typography textAlign="justify" {...typographyStyles.text}>
