@@ -21,6 +21,7 @@ import { Stack, Typography } from '@mui/material';
 import backgroundImage from '../../assets/driving_lessons.png'
 import rectangleImage from '../../assets/rectangle.svg'
 import personCarImage from '../../assets/person_car.png'
+import { Link } from 'react-router-dom/cjs/react-router-dom';
 
 const miniBoxes = [
   {
@@ -248,10 +249,12 @@ const Homepage = () => {
         <Stack direction={{ sm: 'column', md: 'row' }} justifyContent="space-around" useFlexGap flexWrap="wrap" px="100px">
           {miniBoxes.map((data) => (
             <Stack sx={{ display: 'flex', justifyContent: 'center', width: '200px', height: '200px', my: '10px', alignItems: 'center' }}>
-              <img src={data.img} />
-              <Stack p="10px">
-                <Typography sx={{ fontFamily: 'Montserrat', fontWeight: 600, fontSize: '18px' }}>{data.name}</Typography>
-              </Stack>
+              <Link to={`/menu-class?name=${data.name}`}>
+                <img src={data.img} alt={data.name} />
+                <Stack p="10px">
+                  <Typography sx={{ fontFamily: 'Montserrat', fontWeight: 600, fontSize: '18px' }}>{data.name}</Typography>
+                </Stack>
+              </Link>
             </Stack>
           ))}
         </Stack>

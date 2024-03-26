@@ -57,7 +57,6 @@ function Main() {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const isHomepage = searchParams.get('isHomepage');
-  console.log(isHomepage)
   return (
     <>
       <Header homePage={isHomepage}/>
