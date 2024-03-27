@@ -8,12 +8,12 @@ import ForgotPassword from './pages/auth/ForgotPassword'
 import NewPassword from './pages/auth/NewPassword'
 import './App.css'
 import MenuClass from './pages/MenuClass'
-
+import DetailClass from './pages/DetailClass'
 
 function App() {
   return (
     <>
-      <MenuClass />
+      <DetailClass />
     </>
   )
 }
