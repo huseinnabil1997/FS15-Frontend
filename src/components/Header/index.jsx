@@ -1,13 +1,15 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './index.css';
 import Logo from '../../assets/logo.png';
 import Cart from '../../assets/cart.png';
 import User from '../../assets/user.png';
 import Logout from '../../assets/logout.png';
+import { Stack } from '@mui/material';
 
 const Header = ({ confirmSucces = false, homePage = false }) => {
   return (
-    <header className="header">
+    <Stack width="100%" height="86px" position="absolute" top={0} direction="row" display="flex" justifyContent="space-between">
       <div className="logo">
         <img src={Logo} alt="Logo" />
         <span>Otomobil</span>
@@ -15,8 +17,12 @@ const Header = ({ confirmSucces = false, homePage = false }) => {
       <div className="nav">
         {!confirmSucces && !homePage && (
           <>
-            <button className="btn-signup">Sign Up</button>
-            <button className="login">Login</button>
+            <Link to="/register">
+              <button className="btn-signup">Sign Up</button>
+            </Link>
+            <Link to="/login">
+              <button className="login">Login</button>
+            </Link>
           </>
         )}
         {homePage && (
@@ -36,7 +42,7 @@ const Header = ({ confirmSucces = false, homePage = false }) => {
           </>
         )}
       </div>
-    </header>
+    </Stack>
   );
 }
 

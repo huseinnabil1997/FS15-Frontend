@@ -20,8 +20,12 @@ import Sedan from '../../assets/sedan.png';
 import Suv from '../../assets/suv.png';
 import Truck from '../../assets/truck.png';
 import './menuclass.css';
+import { useLocation } from 'react-router-dom/cjs/react-router-dom';
 
 const MenuClass = () => {
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const name = searchParams.get('name');
   const miniBoxes = [
     {
       id: 1,
@@ -110,12 +114,12 @@ const MenuClass = () => {
   ];
   return (
     <>
-      <Header confirmSuccess={false} homePage={true} />
+      {/* <Header confirmSuccess={false} homePage={true} /> */}
       <div className="backgroundMenuClassContainer">
       </div>
       <div className="SUVContainer">
         <div className="benefitTextContainer">
-          <h1>SUV</h1>
+          <h1>{name}</h1>
           <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
           </p>

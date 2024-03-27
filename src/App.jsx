@@ -1,21 +1,74 @@
-import { useState } from 'react'
-import Login from './pages/auth/Login'
-import Register from './pages/auth/Register'
-import ConfirmSucces from './pages/auth/ConfirmSuccess'
-import Homepage from './pages/homepage'
-import Footer from './components/Footer'
-import ForgotPassword from './pages/auth/ForgotPassword'
-import NewPassword from './pages/auth/NewPassword'
-import './App.css'
-import MenuClass from './pages/MenuClass'
-import DetailClass from './pages/DetailClass'
+import React from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Login from './pages/auth/Login';
+import Register from './pages/auth/Register';
+import ConfirmSuccess from './pages/auth/ConfirmSuccess';
+import Homepage from './pages/homepage';
+import ForgotPassword from './pages/auth/ForgotPassword';
+import NewPassword from './pages/auth/NewPassword';
+import MenuClass from './pages/MenuClass';
+import './App.css';
+import Header from './components/Header';
+import { Stack } from '@mui/material';
+import { useLocation } from 'react-router-dom';
+
+const paths = [
+  {
+    pathName: '/',
+    compName: Homepage,
+  },
+  {
+    pathName: '/login',
+    compName: Login,
+  },
+  {
+    pathName: '/register',
+    compName: Register,
+  },
+  {
+    pathName: '/confirm-success',
+    compName: ConfirmSuccess,
+  },
+  {
+    pathName: '/forgot-password',
+    compName: ForgotPassword,
+  },
+  {
+    pathName: '/new-password',
+    compName: NewPassword,
+  },
+  {
+    pathName: '/menu-class',
+    compName: MenuClass,
+  },
+]
 
 function App() {
   return (
     <>
-      <DetailClass />
+      <Router>
+        <Main />
+      </Router>
     </>
-  )
+  );
 }
 
-export default App
+function Main() {
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const isHomepage = searchParams.get('isHomepage');
+  return (
+    <>
+      <Header homePage={isHomepage}/>
+      <Stack mt="86px" direction="column" flexGrow={1}>
+        <Switch>
+          {paths?.map((data) => (
+            <Route key={data.pathName} exact path={data.pathName} component={data.compName} />
+          ))}
+        </Switch>
+      </Stack>
+    </>
+  );
+}
+
+export default App;
