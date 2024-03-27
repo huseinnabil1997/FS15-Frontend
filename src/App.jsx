@@ -11,8 +11,13 @@ import './App.css';
 import Header from './components/Header';
 import { Stack } from '@mui/material';
 import { useLocation } from 'react-router-dom';
+import Test from './test';
 
 const paths = [
+  {
+    pathName: '/test',
+    compName: Test,
+  },
   {
     pathName: '/',
     compName: Homepage,

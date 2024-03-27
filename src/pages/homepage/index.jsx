@@ -21,7 +21,7 @@ import { Stack, Typography } from '@mui/material';
 import backgroundImage from '../../assets/driving_lessons.png'
 import rectangleImage from '../../assets/rectangle.svg'
 import personCarImage from '../../assets/person_car.png'
-import { Link } from 'react-router-dom/cjs/react-router-dom';
+import { Link, useLocation } from 'react-router-dom/cjs/react-router-dom';
 
 const miniBoxes = [
   {
@@ -126,6 +126,9 @@ const lessonData = [
 ]
 
 const Homepage = () => {
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const isHomepage = searchParams.get('isHomepage');
   return (
     <Stack spacing={10}>
       <Stack
@@ -198,16 +201,18 @@ const Homepage = () => {
         </Typography>
         <Stack direction={{ sm: 'column', md: 'row' }} justifyContent="space-around" useFlexGap flexWrap="wrap">
           {boxes.map((data) => (
-            <Stack sx={{ width: '350px', height: '400px', my: '10px' }}>
-              <img src={data.img} />
-              <Stack sx={{ height: '100%' }} display="flex" direction="column" justifyContent="space-between" p="15px">
-                <Stack>
-                  <Typography sx={{ fontFamily: 'Montserrat', fontWeight: 400, fontSize: '16px', color: '#828282' }}>{data.category}</Typography>
-                  <Typography sx={{ fontFamily: 'Montserrat', fontWeight: 600, fontSize: '18px' }}>{data.name}</Typography>
+            <Link to={`/detail-class?isHomepage=${isHomepage}`}>
+              <Stack sx={{ width: '350px', height: '400px', my: '10px' }}>
+                <img src={data.img} />
+                <Stack sx={{ height: '100%' }} display="flex" direction="column" justifyContent="space-between" p="15px">
+                  <Stack>
+                    <Typography sx={{ fontFamily: 'Montserrat', fontWeight: 400, fontSize: '16px', color: '#828282' }}>{data.category}</Typography>
+                    <Typography sx={{ fontFamily: 'Montserrat', fontWeight: 600, fontSize: '18px', color: 'black' }}>{data.name}</Typography>
+                  </Stack>
+                  <Typography sx={{ color: '#790B0A', fontFamily: 'Montserrat', fontWeight: 600, fontSize: '20px' }}>{data.price}</Typography>
                 </Stack>
-                <Typography sx={{ color: '#790B0A', fontFamily: 'Montserrat', fontWeight: 600, fontSize: '20px' }}>{data.price}</Typography>
               </Stack>
-            </Stack>
+            </Link>
           ))}
         </Stack>
       </Stack>
@@ -249,10 +254,10 @@ const Homepage = () => {
         <Stack direction={{ sm: 'column', md: 'row' }} justifyContent="space-around" useFlexGap flexWrap="wrap" px="100px">
           {miniBoxes.map((data) => (
             <Stack sx={{ display: 'flex', justifyContent: 'center', width: '200px', height: '200px', my: '10px', alignItems: 'center' }}>
-              <Link to={`/menu-class?name=${data.name}`}>
+              <Link to={`/menu-class?isHomepage=${isHomepage}&name=${data.name}`}>
                 <img src={data.img} alt={data.name} />
                 <Stack p="10px">
-                  <Typography sx={{ fontFamily: 'Montserrat', fontWeight: 600, fontSize: '18px' }}>{data.name}</Typography>
+                  <Typography sx={{ fontFamily: 'Montserrat', fontWeight: 600, fontSize: '18px', color: 'black' }}>{data.name}</Typography>
                 </Stack>
               </Link>
             </Stack>
