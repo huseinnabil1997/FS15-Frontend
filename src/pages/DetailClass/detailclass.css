@@ -1,0 +1,453 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
+@import url('https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css');
+@import url('https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js');
+
+.menu-header {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  max-width: 100%;
+  min-width: 1280px;
+  margin: 0;
+  height: 86px;
+  left: 0px;
+  margin-left: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+}
+
+.w-100 {
+  width: 100%
+}
+
+.menu-logo {
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+}
+
+.menu-logo img {
+  height: 40px;
+  margin-right: 10px;
+}
+
+.menu-logo span {
+  font-family: Montserrat;
+  font-size: 16px; 
+  font-weight: 500;
+  line-height: 19.5px;
+  text-align: left;
+}
+
+.menu-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu-invoice {
+  font-family: Montserrat;
+  width: 86px;
+  height: 40px;
+  padding: 10px 20px;
+  gap: 10px;
+  border-radius: 8px;
+  opacity: 1;
+  background-color: #790B0A;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 19.5px;
+  text-align: center;
+  color: white;
+  transition: background-color 0.3s, color 0.3s;
+  margin-right: 20px;
+  border: none;
+}
+
+.menu-myclass {
+  font-family: Montserrat;
+  width: 110px;
+  height: 40px;
+  padding: 10px 20px;
+  gap: 10px;
+  border-radius: 8px;
+  opacity: 1;
+  background-color: white;
+  opacity: 1;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 19.5px;
+  text-align: center;
+  color: #790B0A;
+  transition: opacity 0.3s;
+  margin-right: 20px;
+  border: none;
+}
+
+.menu-btn:hover {
+  opacity: 0.5;
+}
+
+.menu-myclass:hover {
+  opacity: 0.5;
+}
+
+.menu-icon-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.menu-icon-button img {
+  width: 16px; /* Adjust size as needed */
+  height: 16px; /* Adjust size as needed */
+}
+
+.menu-icon-button:focus {
+  outline: none;
+}
+
+.menu-separator {
+  width: 1px;
+  height: 30px; /* Adjust height as needed */
+  background-color: #ccc; /* Adjust color as needed */
+  margin-left: 10px; /* Adjust margin as needed */
+  background-color: #790B0A;
+}
+
+.backgroundDetailClassContainer {
+  /* Auto layout */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 40px;
+
+  position: absolute;
+  width: 1140px;
+  height: 551.67px;
+  left: 70px;
+  top: 126px;
+}
+.shoppingCartIcon {
+  width: 24px;
+  height: 24px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.textOverlay {
+  width: 100%;
+  text-align: center;
+  color: white;
+  margin-top: 50px;
+}
+
+.lessonTitle {
+  font-family: Montserrat;
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 39.01px;
+  text-align: center;
+}
+
+.lessonSubtitle {
+  font-family: Montserrat;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 29.26px;
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 60px;
+}
+
+.dataLessonContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+}
+
+.boxLesson {
+  width: Hug (324px)px;
+  height: Hug (207px)px;
+  padding: 16px;
+  gap: 31px;
+  border-radius: 20px;
+}
+
+.boxLesson p {
+  width: 292px;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 19.5px;
+  text-align: center;
+}
+
+.boxLesson h1 {
+  font-family: Montserrat;
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 58.51px;
+  text-align: center;
+  height: 59px;
+}
+
+.joinCourseBox {
+  width: 100%;
+  height: 1050px;
+  display: flex;
+  text-align: center;
+  color: #790B0A;
+  position: absolute;
+  top: 600px;
+  flex-direction: column;
+}
+
+.joinCourseBox h1 {
+  font-family: Montserrat;
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 39.01px;
+}
+
+.boxListContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  /* 3 columns */
+  grid-template-rows: repeat(2, 1fr);
+  /* 2 rows */
+  gap: 10px;
+  margin: 50px 100px;
+}
+
+.boxList {
+  padding: 20px;
+  border-radius: 5px;
+  text-align: left;
+  width: 350px;
+  height: 400px;
+  background-color: white;
+}
+
+.carCategory {
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19.5px;
+  text-align: left;
+  color: #828282;
+}
+
+.boxList h2 {
+  font-family: Montserrat;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 21.94px;
+  text-align: left;
+  margin-bottom: 50px;
+  color: #333333;
+}
+
+.carPrice {
+  font-family: Montserrat;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 24.38px;
+  text-align: left;
+  color: #790B0A;
+}
+
+.benefitContainer {
+  width: 100%;
+  height: 375px;
+  display: flex;
+  text-align: center;
+  color: #790B0A;
+  position: absolute;
+  top: 1700px;
+  flex-direction: row;
+}
+
+.benefitTextContainer {
+  width: 61%;
+  height: auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+
+.benefitTextContainer h1 {
+  font-family: Montserrat;
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 48.76px;
+  text-align: left;
+  padding-left: 100px;
+  color: #790B0A;
+}
+
+.benefitTextContainer p {
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 19.5px;
+  text-align: justify;
+  color: #333333;
+  width: 711px;
+  margin-left: 100px;
+}
+
+.benefitImageContainer {
+  width: 39%;
+  height: auto;
+}
+
+.benefitImageContainer img {
+  width: 373.33px;
+  height: 280px;
+  position: absolute;
+  bottom: 0;
+  right: 70px;
+}
+
+.boxImageTop {
+  width: 441px;
+  height: 40px;
+  background-color: #790B0A;
+  position: absolute;
+  right: 0;
+  top: 150px;
+}
+
+.boxImageBottom {
+  width: 441px;
+  height: 101px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: #790B0A;
+  ;
+}
+
+.moreCarType {
+  width: 100%;
+  height: 500px;
+  display: flex;
+  text-align: center;
+  color: #790B0A;
+  position: absolute;
+  top: 2200px;
+  flex-direction: column;
+}
+
+.moreCarType h1 {
+  font-family: Inter;
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 38.73px;
+  text-align: center;
+}
+
+.moreCarType .boxListContainer {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  /* 3 columns */
+  grid-template-rows: repeat(2, 1fr);
+  /* 2 rows */
+  gap: 10px;
+  margin: 50px 100px;
+}
+
+.moreCarType .boxList {
+  width: 200px;
+  height: 119.67px;
+  gap: 24px;
+  text-align: center;
+}
+
+.moreCarType h2 {
+  font-family: Inter;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 29.05px;
+  text-align: center;
+}
+
+.footerDetailClass {
+  position: absolute;
+  top: 2000px;
+  width: 100%;
+  margin: 0;
+  left: 0px;
+  margin-left: 0;
+  z-index: 1000;
+  display: flex;
+  background-color: white;
+  height: 220px;
+  border-top: 1px solid #E0E0E0
+}
+
+.footerMenuClass {
+  position: absolute;
+  top: 2800px;
+  width: 100%;
+  margin: 0;
+  left: 0px;
+  margin-left: 0;
+  z-index: 1000;
+  display: flex;
+  background-color: white;
+  height: 220px;
+  border-top: 1px solid #E0E0E0
+}
+
+.SUVContainer {
+  width: 100%;
+  height: 375px;
+  display: flex;
+  text-align: center;
+  color: #aabb;
+  position: absolute;
+  top: 1700px;
+  flex-direction: row;
+}
+
+.SUVTextContainer {
+  width: 61%;
+  height: auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+
+.SUVTextContainer h1 {
+  font-family: Montserrat;
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 48.76px;
+  text-align: left;
+  padding-left: 100px;
+  color: #790B0A;
+}
+
+.SUVTextContainer p {
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 19.5px;
+  text-align: justify;
+  color: #333333;
+  width: 711px;
+  margin-left: 100px;
+}
