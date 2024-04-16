@@ -1,115 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import KijangInova from '../../assets/kijang_inova.png'
-import HondaBrio from '../../assets/honda_brio.png'
-import HyundaiPalisade from '../../assets/hyundai_palisade.png'
-import MitsubishiPajero from '../../assets/mitsubishi_pajero.png'
-import DumpTruck from '../../assets/dump_truck.png'
-import HondaCivic from '../../assets/honda_civic.png'
-import Benefit from '../../assets/benefit.png'
 import './homepage.css';
-import Electric from '../../assets/electric.png'
-import Hatchback from '../../assets/hatchback.png'
-import Lcgc from '../../assets/lcgc.png'
-import Mpv from '../../assets/mpv.png'
-import Offroad from '../../assets/offroad.png'
-import Sedan from '../../assets/sedan.png'
-import Suv from '../../assets/suv.png'
-import Truck from '../../assets/truck.png'
 import { Stack, Typography } from '@mui/material';
 import backgroundImage from '../../assets/driving_lessons.png'
-import rectangleImage from '../../assets/rectangle.svg'
 import personCarImage from '../../assets/person_car.png'
 import { Link, useLocation } from 'react-router-dom/cjs/react-router-dom';
 import axiosInstance from '../../utils/axiosInstance';
-
-const miniBoxes = [
-  {
-    id: 1,
-    name: 'Electric',
-    img: Electric,
-  },
-  {
-    id: 2,
-    name: 'Hatchback',
-    img: Hatchback,
-  },
-  {
-    id: 3,
-    name: 'LCGC',
-    img: Lcgc,
-  },
-  {
-    id: 4,
-    name: 'MPV',
-    img: Mpv,
-  },
-  {
-    id: 5,
-    name: 'Offroad',
-    img: Offroad,
-  },
-  {
-    id: 6,
-    name: 'Sedan',
-    img: Sedan,
-  },
-  {
-    id: 7,
-    name: 'SUV',
-    img: Suv,
-  },
-  {
-    id: 8,
-    name: 'Truck',
-    img: Truck,
-  },
-];
-const boxes = [
-  {
-    id: 1,
-    category: 'SUV',
-    name: 'Course SUV Kijang Innova',
-    price: 'IDR 700.000',
-    img: KijangInova,
-  },
-  {
-    id: 2,
-    category: 'LCGC',
-    name: 'Course LCGC Honda Brio',
-    price: 'IDR 500.000',
-    img: HondaBrio,
-  },
-  {
-    id: 3,
-    category: 'SUV',
-    name: 'Hyundai Palisade 2021',
-    price: 'IDR 800.000',
-    img: HyundaiPalisade,
-  },
-  {
-    id: 4,
-    category: 'SUV',
-    name: 'Course Mitsubishi Pajero',
-    price: 'IDR 800.000',
-    img: MitsubishiPajero,
-  },
-  {
-    id: 5,
-    category: 'Truck',
-    name: 'Dump Truck for Mining Constructor',
-    price: 'IDR 1.200.000',
-    img: DumpTruck,
-  },
-  {
-    id: 6,
-    category: 'Sedan',
-    name: 'Sedan Honda Civic',
-    price: 'IDR 400.000',
-    img: HondaCivic,
-  },
-];
 
 const lessonData = [
   {
