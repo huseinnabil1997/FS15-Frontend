@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import KijangInova from '../../assets/kijang_inova.png'
@@ -22,6 +22,7 @@ import backgroundImage from '../../assets/driving_lessons.png'
 import rectangleImage from '../../assets/rectangle.svg'
 import personCarImage from '../../assets/person_car.png'
 import { Link, useLocation } from 'react-router-dom/cjs/react-router-dom';
+import axiosInstance from '../../utils/axiosInstance';
 
 const miniBoxes = [
   {
@@ -126,9 +127,41 @@ const lessonData = [
 ]
 
 const Homepage = () => {
+  const [courses, setCourses] = useState([]);
+  const [categories, setCategories] = useState([]);
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const isHomepage = searchParams.get('isHomepage');
+
+  const getCourseData = async () => {
+    try {
+      const res = await axiosInstance.get('/Course/GetAll')
+      setCourses(res.data)
+      console.log('res getCourseData', res)
+    } catch (err) {
+      console.log('err getCourseData', err)
+    }
+  }
+
+  const getCategoryData = async () => {
+    try {
+      const res = await axiosInstance.get('/CarCategory/GetAll')
+      setCategories(res.data)
+      console.log('res getCategoryData', res)
+    } catch (err) {
+      console.log('err getCategoryData', err)
+    }
+  }
+
+  useEffect(() => {
+    getCourseData();
+    getCategoryData();
+  }, [])
+
+  const formatCurrency = (amount) => {
+    return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+  }
+
   return (
     <Stack spacing={10}>
       <Stack
@@ -200,16 +233,28 @@ const Homepage = () => {
           Join us for the course
         </Typography>
         <Stack direction={{ sm: 'column', md: 'row' }} justifyContent="space-around" useFlexGap flexWrap="wrap">
-          {boxes.map((data) => (
+          {courses.map((data) => (
             <Link to={`/detail-class?isHomepage=${isHomepage}`}>
               <Stack sx={{ width: '350px', height: '400px', my: '10px' }}>
-                <img src={data.img} />
+                <img src={data.image_url} />
                 <Stack sx={{ height: '100%' }} display="flex" direction="column" justifyContent="space-between" p="15px">
                   <Stack>
-                    <Typography sx={{ fontFamily: 'Montserrat', fontWeight: 400, fontSize: '16px', color: '#828282' }}>{data.category}</Typography>
-                    <Typography sx={{ fontFamily: 'Montserrat', fontWeight: 600, fontSize: '18px', color: 'black' }}>{data.name}</Typography>
+                    <Typography
+                      sx={{ fontFamily: 'Montserrat', fontWeight: 400, fontSize: '16px', color: '#828282' }}
+                    >
+                      {data.category_name}
+                    </Typography>
+                    <Typography
+                      sx={{ fontFamily: 'Montserrat', fontWeight: 600, fontSize: '18px', color: 'black' }}
+                    >
+                      {data.course_name}
+                    </Typography>
                   </Stack>
-                  <Typography sx={{ color: '#790B0A', fontFamily: 'Montserrat', fontWeight: 600, fontSize: '20px' }}>{data.price}</Typography>
+                  <Typography
+                    sx={{ color: '#790B0A', fontFamily: 'Montserrat', fontWeight: 600, fontSize: '20px' }}
+                  >
+                    IDR {formatCurrency(data.price)}
+                  </Typography>
                 </Stack>
               </Stack>
             </Link>
@@ -252,12 +297,16 @@ const Homepage = () => {
           Join us for the course
         </Typography>
         <Stack direction={{ sm: 'column', md: 'row' }} justifyContent="space-around" useFlexGap flexWrap="wrap" px="100px">
-          {miniBoxes.map((data) => (
+          {categories.map((data) => (
             <Stack sx={{ display: 'flex', justifyContent: 'center', width: '200px', height: '200px', my: '10px', alignItems: 'center' }}>
-              <Link to={`/menu-class?isHomepage=${isHomepage}&name=${data.name}`}>
-                <img src={data.img} alt={data.name} />
+              <Link to={`/menu-class?isHomepage=${isHomepage}&name=${data.category_name}`}>
+                <img src={data.image_url} alt={data.category_name} />
                 <Stack p="10px">
-                  <Typography sx={{ fontFamily: 'Montserrat', fontWeight: 600, fontSize: '18px', color: 'black' }}>{data.name}</Typography>
+                  <Typography
+                    sx={{ fontFamily: 'Montserrat', fontWeight: 600, fontSize: '18px', color: 'black' }}
+                  >
+                    {data.category_name}
+                  </Typography>
                 </Stack>
               </Link>
             </Stack>
