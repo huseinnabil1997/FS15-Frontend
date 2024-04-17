@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap');
 
-.menu-header {
+/* .menu-header {
   position: absolute;
   top: 0;
   width: 100%;
@@ -17,7 +17,7 @@
   justify-content: space-between;
   align-items: center;
   background-color: white;
-}
+} */
 
 .menu-logo {
   display: flex;

@@ -11,6 +11,8 @@ import './App.css';
 import Header from './components/Header';
 import { Stack } from '@mui/material';
 import { useLocation } from 'react-router-dom';
+import DetailClass from './pages/DetailClass';
+import Checkout from './pages/Checkout';
 import Test from './test';
 
 const paths = [
@@ -45,6 +47,18 @@ const paths = [
   {
     pathName: '/menu-class',
     compName: MenuClass,
+    
+  },
+  {
+    pathName: '/detail-class',
+    compName: DetailClass,
+    
+  },
+
+  {
+    pathName: '/checkout',
+    compName: Checkout,
+    
   },
 ]
 
