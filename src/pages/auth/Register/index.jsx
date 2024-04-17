@@ -3,6 +3,7 @@ import './register.css';
 import Header from '../../../components/Header';
 import * as Yup from 'yup';
 import { Link, useHistory } from 'react-router-dom';
+import axiosInstance from '../../../utils/axiosInstance';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -37,11 +38,47 @@ const Register = () => {
     });
   };
 
-  const onSubmit = (e) => {
+  // const onSubmit = async (e) => {
+  //   e.preventDefault();
+
+  //   try {
+  //     await validationSchema.validate(formData, { abortEarly: false });
+  //     await axiosInstance.post('/User/CreateUser', {
+  //       name: formData.name,
+  //       email: formData.email,
+  //       password: formData.password
+  //     })
+
+  //     setErrors({
+  //       name: '',
+  //       email: '',
+  //       password: '',
+  //       confirm_password: ''
+  //     });
+
+  //     history.push('/confirm-success');
+  //   } catch (err) {
+  //     let errorMessage = 'Registrasi gagal';
+  //     const newErrors = {};
+  //     err.inner.forEach(error => {
+  //       newErrors[error.path] = error.message;
+  //     });
+  //     setErrors(newErrors);
+  //     setErrors({
+  //       general: errorMessage
+  //     });
+  //   }
+  // };
+
+  const onSubmit = async (e) => {
     e.preventDefault();
     validationSchema.validate(formData, { abortEarly: false })
       .then(() => {
-        console.log(formData);
+        axiosInstance.post('/User/CreateUser', {
+          name: formData.name,
+          email: formData.email,
+          password: formData.password
+        })
         setErrors({
           name: '',
           email: '',
@@ -49,7 +86,7 @@ const Register = () => {
           confirm_password: ''
         });
 
-        history.push('/confirm-success');
+        history.push('/login');
       })
       .catch((err) => {
         const newErrors = {};
@@ -115,6 +152,7 @@ const Register = () => {
             />
             {errors.confirm_password && <p className="error-message">{errors.confirm_password}</p>}
           </div>
+          {errors.general && <p className="error-message">{errors.general}</p>}
           <div className="button_signup">
             <button className="btn" type="submit">Sign Up</button>
           </div>

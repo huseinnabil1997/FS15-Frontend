@@ -3,6 +3,7 @@ import './forgotPassword.css';
 import Header from '../../../components/Header';
 import * as Yup from 'yup';
 import { Link, useHistory } from 'react-router-dom';
+import axiosInstance from '../../../utils/axiosInstance';
 
 const ForgotPassword = () => {
   const [formData, setFormData] = useState({
@@ -10,11 +11,10 @@ const ForgotPassword = () => {
   });
   const [errors, setErrors] = useState({
     email: '',
+    general: '',
   });
 
   const history = useHistory();
-
-  console.log(formData)
 
   const validationSchema = Yup.object().shape({
     email: Yup.string().email('Invalid email').required('Email is required'),
@@ -32,12 +32,11 @@ const ForgotPassword = () => {
     e.preventDefault();
     validationSchema.validate(formData, { abortEarly: false })
       .then(() => {
-        // Handle form submission
-        console.log(formData);
+        axiosInstance.post('/User/ForgetPassword?email=' + formData.email);
         setErrors({
           email: '',
         });
-        history.push('/new-password');
+        history.push('/');
       })
       .catch((err) => {
         const newErrors = {};
@@ -45,6 +44,10 @@ const ForgotPassword = () => {
           newErrors[error.path] = error.message;
         });
         setErrors(newErrors);
+        setErrors({
+          ...errors,
+          general: err.response.data ?? '', // set error general
+        });
       });
   };
 
@@ -70,6 +73,7 @@ const ForgotPassword = () => {
             />
             {errors.email && <p className="error-message">{errors.email}</p>}
           </div>
+          {errors.general && <p className="error-message">{errors.general}</p>}
           <div className="button_login">
             <Link to="/login">
               <button style={{ marginRight: 20 }} className="btn_cancel" type="submit">Cancel</button>
