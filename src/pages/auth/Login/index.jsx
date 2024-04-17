@@ -25,7 +25,14 @@ const Login = () => {
 
   const getToken = async (email, password) => {
     try {
-      await axiosInstance.post('/User/Login', { email, password })
+      const res = await axiosInstance.post('/User/Login', { email, password })
+      localStorage.setItem('token', res.data.token);
+      history.push('/');
+        setErrors({
+          email: '',
+          password: '',
+          general: '',
+        });
       return res.data.token;
     } catch (err) {
       setErrors({
@@ -47,15 +54,8 @@ const Login = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     validationSchema.validate(formData, { abortEarly: false })
-      .then(async () => {
-        const token = await getToken(formData.email, formData.password);
-        localStorage.setItem('token', token);
-        setErrors({
-          email: '',
-          password: '',
-          general: '',
-        });
-        history.push('/');
+      .then(() => {
+        getToken(formData.email, formData.password);
       })
       .catch((err) => {
         const newErrors = {};

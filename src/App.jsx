@@ -76,6 +76,7 @@ function Main() {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const token = localStorage.getItem('token');
+  console.log('token', token)
   return (
     <>
       <Header homePage={!!token}/>
