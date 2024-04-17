@@ -3,6 +3,7 @@ import './login.css';
 import Header from '../../../components/Header';
 import * as Yup from 'yup';
 import { useHistory, Link } from 'react-router-dom';
+import axiosInstance from '../../../utils/axiosInstance';
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -11,7 +12,8 @@ const Login = () => {
   });
   const [errors, setErrors] = useState({
     email: '',
-    password: ''
+    password: '',
+    general: '',
   });
 
   const history = useHistory();
@@ -21,6 +23,19 @@ const Login = () => {
     password: Yup.string().required('Password is required'),
   });
 
+  const getToken = async (email, password) => {
+    try {
+      await axiosInstance.post('/User/Login', { email, password })
+      return res.data.token;
+    } catch (err) {
+      setErrors({
+        ...errors,
+        general: err.response.data, // set error general
+      });
+      throw err;
+    }
+  }
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -29,17 +44,18 @@ const Login = () => {
     });
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     validationSchema.validate(formData, { abortEarly: false })
-      .then(() => {
-        console.log(formData);
+      .then(async () => {
+        const token = await getToken(formData.email, formData.password);
+        localStorage.setItem('token', token);
         setErrors({
           email: '',
-          password: ''
+          password: '',
+          general: '',
         });
-
-        history.push('/?isHomepage=true');
+        history.push('/');
       })
       .catch((err) => {
         const newErrors = {};
@@ -49,6 +65,43 @@ const Login = () => {
         setErrors(newErrors);
       });
   };
+
+  // const onSubmit = async (e) => {
+  //   e.preventDefault();
+
+  //   try {
+  //     await validationSchema.validate(formData, { abortEarly: false });
+
+  //     const token = await getToken(formData.email, formData.password);
+
+  //     if (!token) {
+  //       throw new Error('Token not found');
+  //     }
+
+  //     localStorage.setItem('token', token);
+
+  //     setErrors({
+  //       email: '',
+  //       password: ''
+  //     });
+
+  //     history.push('/');
+  //   } catch (err) {
+  //     let errorMessage = 'Login failed';
+
+  //     if (err.response && err.response.data && err.response.data.message) {
+  //       errorMessage = err.response.data.message;
+  //     } else if (err.message === 'Token not found') {
+  //       errorMessage = 'Token is missing. Please try again.';
+  //     } else {
+  //       errorMessage = err.message;
+  //     }
+
+  //     setErrors({
+  //       general: errorMessage
+  //     });
+  //   }
+  // };
 
   return (
     <>
@@ -83,6 +136,7 @@ const Login = () => {
             />
             {errors.password && <p className="error-message">{errors.password}</p>}
           </div>
+          {errors.general && <p className="error-message">{errors.general}</p>}
           <div className="brief-text">
             Forgot Password? <Link to="/forgot-password"><span>Click Here</span></Link>
           </div>

@@ -37,7 +37,7 @@ const Header = ({ confirmSucces = false, homePage = false }) => {
               <img src={User} alt="User" />
             </button>
             <Link to="/login">
-              <button className="icon_button" style={{ marginRight: 20 }} onClick={() => console.log("Logout clicked")}>
+              <button className="icon_button" style={{ marginRight: 20 }} onClick={() => localStorage.removeItem('token')}>
                 <img src={Logout} alt="Logout" />
               </button>
             </Link>

@@ -61,10 +61,10 @@ function App() {
 function Main() {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
-  const isHomepage = searchParams.get('isHomepage');
+  const token = localStorage.getItem('token');
   return (
     <>
-      <Header homePage={isHomepage}/>
+      <Header homePage={!!token}/>
       <Stack mt="86px" direction="column" flexGrow={1}>
         <Switch>
           {paths?.map((data) => (
