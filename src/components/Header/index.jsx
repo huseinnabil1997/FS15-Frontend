@@ -6,8 +6,10 @@ import Cart from '../../assets/cart.png';
 import User from '../../assets/user.png';
 import Logout from '../../assets/logout.png';
 import { Stack } from '@mui/material';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom';
 
 const Header = ({ confirmSucces = false, homePage = false }) => {
+  const history = useHistory();
   return (
     <Stack width="100%" height="86px" position="absolute" top={0} direction="row" display="flex" justifyContent="space-between">
       <div className="logo">
@@ -17,17 +19,13 @@ const Header = ({ confirmSucces = false, homePage = false }) => {
       <div className="nav">
         {!confirmSucces && !homePage && (
           <>
-            <Link to="/register">
-              <button className="btn-signup">Sign Up</button>
-            </Link>
-            <Link to="/login">
-              <button className="login">Login</button>
-            </Link>
+            <button onClick={() => history.push('/register')} className="btn-signup">Sign Up</button>
+            <button onClick={() => history.push('/login')} className="login">Login</button>
           </>
         )}
         {homePage && (
           <>
-            <button className="icon_button" onClick={() => console.log("Cart clicked")}>
+            <button className="icon_button" onClick={() => history.push('/checkout')}>
               <img src={Cart} alt="Cart" />
             </button>
             <button className="button_header">My Class</button>
@@ -36,11 +34,16 @@ const Header = ({ confirmSucces = false, homePage = false }) => {
             <button className="icon_button" style={{ marginLeft: 20, marginRight: 20 }} onClick={() => console.log("User clicked")}>
               <img src={User} alt="User" />
             </button>
-            <Link to="/login">
-              <button className="icon_button" style={{ marginRight: 20 }} onClick={() => localStorage.removeItem('token')}>
-                <img src={Logout} alt="Logout" />
-              </button>
-            </Link>
+            <button
+              className="icon_button"
+              style={{ marginRight: 20 }}
+              onClick={() => {
+                localStorage.removeItem('token');
+                history.push('/login');
+              }}
+            >
+              <img src={Logout} alt="Logout" />
+            </button>
           </>
         )}
       </div>
