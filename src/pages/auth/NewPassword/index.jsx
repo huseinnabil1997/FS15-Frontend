@@ -3,6 +3,8 @@ import './newPassword.css';
 import Header from '../../../components/Header';
 import * as Yup from 'yup';
 import { Link, useHistory } from 'react-router-dom';
+import { useLocation } from 'react-router-dom/cjs/react-router-dom';
+import axiosInstance from '../../../utils/axiosInstance';
 
 const NewPassword = () => {
   const [formData, setFormData] = useState({
@@ -12,9 +14,12 @@ const NewPassword = () => {
   const [errors, setErrors] = useState({
     newPassword: '',
     confirmNewPassword: '',
+    general: '',
   });
 
-  console.log(formData);
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const email = searchParams.get('email');
 
   const validationSchema = Yup.object().shape({
     newPassword: Yup.string().required('New Password is required').min(6, 'Password must be at least 6 characters'),
@@ -37,7 +42,11 @@ const NewPassword = () => {
     e.preventDefault();
     validationSchema.validate(formData, { abortEarly: false })
       .then(() => {
-        console.log(formData);
+        axiosInstance.post('/User/ResetPassword', {
+          email: email,
+          password: formData.newPassword,
+          confirmPassword: formData.confirmNewPassword,
+        });
         setErrors({
           newPassword: '',
           confirmNewPassword: '',
@@ -50,6 +59,10 @@ const NewPassword = () => {
           newErrors[error.path] = error.message;
         });
         setErrors(newErrors);
+        setErrors({
+          ...errors,
+          general: err.response.data ?? '', // set error general
+        });
       });
   };
 
@@ -83,6 +96,7 @@ const NewPassword = () => {
             />
             {errors.confirmNewPassword && <p className="error-message">{errors.confirmNewPassword}</p>}
           </div>
+          {errors.general && <p className="error-message">{errors.general}</p>}
           <div className="button_login">
             <Link to="/login"><button style={{marginRight: 20}} className="btn_cancel" type="button">Cancel</button></Link>
             <button className="btn" type="submit">Submit</button>

@@ -36,9 +36,11 @@ const Header = ({ confirmSucces = false, homePage = false }) => {
             <button className="icon_button" style={{ marginLeft: 20, marginRight: 20 }} onClick={() => console.log("User clicked")}>
               <img src={User} alt="User" />
             </button>
-            <button className="icon_button" style={{ marginRight: 20 }} onClick={() => console.log("Logout clicked")}>
-              <img src={Logout} alt="Logout" />
-            </button>
+            <Link to="/login">
+              <button className="icon_button" style={{ marginRight: 20 }} onClick={() => localStorage.removeItem('token')}>
+                <img src={Logout} alt="Logout" />
+              </button>
+            </Link>
           </>
         )}
       </div>

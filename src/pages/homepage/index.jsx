@@ -1,114 +1,11 @@
-import React from 'react';
-import Header from '../../components/Header';
+import React, { useEffect, useState } from 'react';
 import Footer from '../../components/Footer';
-import KijangInova from '../../assets/kijang_inova.png'
-import HondaBrio from '../../assets/honda_brio.png'
-import HyundaiPalisade from '../../assets/hyundai_palisade.png'
-import MitsubishiPajero from '../../assets/mitsubishi_pajero.png'
-import DumpTruck from '../../assets/dump_truck.png'
-import HondaCivic from '../../assets/honda_civic.png'
-import Benefit from '../../assets/benefit.png'
 import './homepage.css';
-import Electric from '../../assets/electric.png'
-import Hatchback from '../../assets/hatchback.png'
-import Lcgc from '../../assets/lcgc.png'
-import Mpv from '../../assets/mpv.png'
-import Offroad from '../../assets/offroad.png'
-import Sedan from '../../assets/sedan.png'
-import Suv from '../../assets/suv.png'
-import Truck from '../../assets/truck.png'
 import { Stack, Typography } from '@mui/material';
 import backgroundImage from '../../assets/driving_lessons.png'
-import rectangleImage from '../../assets/rectangle.svg'
 import personCarImage from '../../assets/person_car.png'
-import { Link } from 'react-router-dom/cjs/react-router-dom';
-
-const miniBoxes = [
-  {
-    id: 1,
-    name: 'Electric',
-    img: Electric,
-  },
-  {
-    id: 2,
-    name: 'Hatchback',
-    img: Hatchback,
-  },
-  {
-    id: 3,
-    name: 'LCGC',
-    img: Lcgc,
-  },
-  {
-    id: 4,
-    name: 'MPV',
-    img: Mpv,
-  },
-  {
-    id: 5,
-    name: 'Offroad',
-    img: Offroad,
-  },
-  {
-    id: 6,
-    name: 'Sedan',
-    img: Sedan,
-  },
-  {
-    id: 7,
-    name: 'SUV',
-    img: Suv,
-  },
-  {
-    id: 8,
-    name: 'Truck',
-    img: Truck,
-  },
-];
-const boxes = [
-  {
-    id: 1,
-    category: 'SUV',
-    name: 'Course SUV Kijang Innova',
-    price: 'IDR 700.000',
-    img: KijangInova,
-  },
-  {
-    id: 2,
-    category: 'LCGC',
-    name: 'Course LCGC Honda Brio',
-    price: 'IDR 500.000',
-    img: HondaBrio,
-  },
-  {
-    id: 3,
-    category: 'SUV',
-    name: 'Hyundai Palisade 2021',
-    price: 'IDR 800.000',
-    img: HyundaiPalisade,
-  },
-  {
-    id: 4,
-    category: 'SUV',
-    name: 'Course Mitsubishi Pajero',
-    price: 'IDR 800.000',
-    img: MitsubishiPajero,
-  },
-  {
-    id: 5,
-    category: 'Truck',
-    name: 'Dump Truck for Mining Constructor',
-    price: 'IDR 1.200.000',
-    img: DumpTruck,
-  },
-  {
-    id: 6,
-    category: 'Sedan',
-    name: 'Sedan Honda Civic',
-    price: 'IDR 400.000',
-    img: HondaCivic,
-  },
-];
+import { Link, useLocation } from 'react-router-dom/cjs/react-router-dom';
+import axiosInstance from '../../utils/axiosInstance';
 
 const lessonData = [
   {
@@ -126,6 +23,41 @@ const lessonData = [
 ]
 
 const Homepage = () => {
+  const [courses, setCourses] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const isHomepage = searchParams.get('isHomepage');
+
+  const getCourseData = async () => {
+    try {
+      const res = await axiosInstance.get('/Course/GetAll')
+      setCourses(res.data)
+      console.log('res getCourseData', res)
+    } catch (err) {
+      console.log('err getCourseData', err)
+    }
+  }
+
+  const getCategoryData = async () => {
+    try {
+      const res = await axiosInstance.get('/CarCategory/GetAll')
+      setCategories(res.data)
+      console.log('res getCategoryData', res)
+    } catch (err) {
+      console.log('err getCategoryData', err)
+    }
+  }
+
+  useEffect(() => {
+    getCourseData();
+    getCategoryData();
+  }, [])
+
+  const formatCurrency = (amount) => {
+    return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+  }
+
   return (
     <Stack spacing={10}>
       <Stack
@@ -197,17 +129,31 @@ const Homepage = () => {
           Join us for the course
         </Typography>
         <Stack direction={{ sm: 'column', md: 'row' }} justifyContent="space-around" useFlexGap flexWrap="wrap">
-          {boxes.map((data) => (
-            <Stack sx={{ width: '350px', height: '400px', my: '10px' }}>
-              <img src={data.img} />
-              <Stack sx={{ height: '100%' }} display="flex" direction="column" justifyContent="space-between" p="15px">
-                <Stack>
-                  <Typography sx={{ fontFamily: 'Montserrat', fontWeight: 400, fontSize: '16px', color: '#828282' }}>{data.category}</Typography>
-                  <Typography sx={{ fontFamily: 'Montserrat', fontWeight: 600, fontSize: '18px' }}>{data.name}</Typography>
+          {courses.map((data) => (
+            <Link to={`/detail-class?isHomepage=${isHomepage}`}>
+              <Stack sx={{ width: '350px', height: '400px', my: '10px' }}>
+                <img src={data.image_url} />
+                <Stack sx={{ height: '100%' }} display="flex" direction="column" justifyContent="space-between" p="15px">
+                  <Stack>
+                    <Typography
+                      sx={{ fontFamily: 'Montserrat', fontWeight: 400, fontSize: '16px', color: '#828282' }}
+                    >
+                      {data.category_name}
+                    </Typography>
+                    <Typography
+                      sx={{ fontFamily: 'Montserrat', fontWeight: 600, fontSize: '18px', color: 'black' }}
+                    >
+                      {data.course_name}
+                    </Typography>
+                  </Stack>
+                  <Typography
+                    sx={{ color: '#790B0A', fontFamily: 'Montserrat', fontWeight: 600, fontSize: '20px' }}
+                  >
+                    IDR {formatCurrency(data.price)}
+                  </Typography>
                 </Stack>
-                <Typography sx={{ color: '#790B0A', fontFamily: 'Montserrat', fontWeight: 600, fontSize: '20px' }}>{data.price}</Typography>
               </Stack>
-            </Stack>
+            </Link>
           ))}
         </Stack>
       </Stack>
@@ -247,12 +193,16 @@ const Homepage = () => {
           Join us for the course
         </Typography>
         <Stack direction={{ sm: 'column', md: 'row' }} justifyContent="space-around" useFlexGap flexWrap="wrap" px="100px">
-          {miniBoxes.map((data) => (
+          {categories.map((data) => (
             <Stack sx={{ display: 'flex', justifyContent: 'center', width: '200px', height: '200px', my: '10px', alignItems: 'center' }}>
-              <Link to={`/menu-class?name=${data.name}`}>
-                <img src={data.img} alt={data.name} />
+              <Link to={`/menu-class?isHomepage=${isHomepage}&name=${data.category_name}`}>
+                <img src={data.image_url} alt={data.category_name} />
                 <Stack p="10px">
-                  <Typography sx={{ fontFamily: 'Montserrat', fontWeight: 600, fontSize: '18px' }}>{data.name}</Typography>
+                  <Typography
+                    sx={{ fontFamily: 'Montserrat', fontWeight: 600, fontSize: '18px', color: 'black' }}
+                  >
+                    {data.category_name}
+                  </Typography>
                 </Stack>
               </Link>
             </Stack>

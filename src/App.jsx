@@ -13,8 +13,13 @@ import { Stack } from '@mui/material';
 import { useLocation } from 'react-router-dom';
 import DetailClass from './pages/DetailClass';
 import Checkout from './pages/Checkout';
+import Test from './test';
 
 const paths = [
+  {
+    pathName: '/test',
+    compName: Test,
+  },
   {
     pathName: '/',
     compName: Homepage,
@@ -70,10 +75,10 @@ function App() {
 function Main() {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
-  const isHomepage = searchParams.get('isHomepage');
+  const token = localStorage.getItem('token');
   return (
     <>
-      <Header homePage={isHomepage}/>
+      <Header homePage={!!token}/>
       <Stack mt="86px" direction="column" flexGrow={1}>
         <Switch>
           {paths?.map((data) => (
