@@ -4,8 +4,10 @@ import Header from '../../../components/Header';
 import * as Yup from 'yup';
 import { useHistory, Link } from 'react-router-dom';
 import axiosInstance from '../../../utils/axiosInstance';
+import { useToken } from '../../../utils/TokenContext';
 
 const Login = () => {
+  const { saveToken } = useToken();
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -26,7 +28,8 @@ const Login = () => {
   const getToken = async (email, password) => {
     try {
       const res = await axiosInstance.post('/User/Login', { email, password })
-      localStorage.setItem('token', res.data.token);
+      // localStorage.setItem('token', res.data.token);
+      saveToken(res.data.token);
       history.push('/');
         setErrors({
           email: '',

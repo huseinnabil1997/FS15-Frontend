@@ -12,6 +12,7 @@ import { Stack } from '@mui/material';
 import DetailClass from './pages/DetailClass';
 import Checkout from './pages/Checkout';
 import Test from './test';
+import { TokenProvider } from './utils/TokenContext';
 
 const paths = [
   {
@@ -45,28 +46,28 @@ const paths = [
   {
     pathName: '/menu-class',
     compName: MenuClass,
-    
+
   },
   {
     pathName: '/detail-class',
     compName: DetailClass,
-    
+
   },
 
   {
     pathName: '/checkout',
     compName: Checkout,
-    
+
   },
 ]
 
 function App() {
   return (
-    <>
+    <TokenProvider>
       <Router>
         <Main />
       </Router>
-    </>
+    </TokenProvider>
   );
 }
 
@@ -75,7 +76,7 @@ function Main() {
   console.log('token', token)
   return (
     <>
-      <Header homePage={!!token}/>
+      <Header homePage={!!token} />
       <Stack mt="86px" direction="column" flexGrow={1}>
         <Switch>
           {paths?.map((data) => (
