@@ -53,10 +53,14 @@ const paths = [
     compName: DetailClass,
 
   },
-
   {
     pathName: '/checkout',
     compName: Checkout,
+
+  },
+  {
+    pathName: '/test',
+    compName: Test,
 
   },
 ]
