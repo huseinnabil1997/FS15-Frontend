@@ -1,4 +1,3 @@
-import React from 'react';
 import './index.css';
 import Phone from '../../assets/phone.png'
 import Instagram from '../../assets/instagram.png'

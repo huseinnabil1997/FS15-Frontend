@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Footer from '../../components/Footer';
 import './homepage.css';
 import { Stack, Typography } from '@mui/material';
@@ -92,8 +92,9 @@ const Homepage = () => {
           </Typography>
         </Stack>
         <Stack direction="row">
-          {lessonData.map((data) => (
+          {lessonData.map((data, index) => (
             <Stack
+              key={index}
               spacing={3}
               sx={{
                 display: 'flex',
@@ -129,8 +130,8 @@ const Homepage = () => {
           Join us for the course
         </Typography>
         <Stack direction={{ sm: 'column', md: 'row' }} justifyContent="space-around" useFlexGap flexWrap="wrap">
-          {courses.map((data) => (
-            <Link to={`/detail-class?isHomepage=${isHomepage}`}>
+          {courses.map((data, index) => (
+            <Link key={index} to={`/detail-class?isHomepage=${isHomepage}`}>
               <Stack sx={{ width: '350px', height: '400px', my: '10px' }}>
                 <img src={data.image_url} />
                 <Stack sx={{ height: '100%' }} display="flex" direction="column" justifyContent="space-between" p="15px">
@@ -193,8 +194,8 @@ const Homepage = () => {
           Join us for the course
         </Typography>
         <Stack direction={{ sm: 'column', md: 'row' }} justifyContent="space-around" useFlexGap flexWrap="wrap" px="100px">
-          {categories.map((data) => (
-            <Stack sx={{ display: 'flex', justifyContent: 'center', width: '200px', height: '200px', my: '10px', alignItems: 'center' }}>
+          {categories.map((data, index) => (
+            <Stack key={index} sx={{ display: 'flex', justifyContent: 'center', width: '200px', height: '200px', my: '10px', alignItems: 'center' }}>
               <Link to={`/menu-class?isHomepage=${isHomepage}&name=${data.category_name}`}>
                 <img src={data.image_url} alt={data.category_name} />
                 <Stack p="10px">

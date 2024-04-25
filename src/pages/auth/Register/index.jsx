@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './register.css';
 import Header from '../../../components/Header';
 import * as Yup from 'yup';
@@ -102,7 +102,7 @@ const Register = () => {
       <Header />
       <div className="login-container">
         <div className="welcome-text">
-          Let's Join our course!
+          Let&apos;s Join our course!
         </div>
         <div className="brief-text">
           Please register first

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './newPassword.css';
 import Header from '../../../components/Header';
 import * as Yup from 'yup';
