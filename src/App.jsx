@@ -1,4 +1,3 @@
-import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
@@ -10,7 +9,6 @@ import MenuClass from './pages/MenuClass';
 import './App.css';
 import Header from './components/Header';
 import { Stack } from '@mui/material';
-import { useLocation } from 'react-router-dom';
 import DetailClass from './pages/DetailClass';
 import Checkout from './pages/Checkout';
 import Test from './test';
@@ -73,8 +71,6 @@ function App() {
 }
 
 function Main() {
-  const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
   const token = localStorage.getItem('token');
   console.log('token', token)
   return (

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './login.css';
 import Header from '../../../components/Header';
 import * as Yup from 'yup';
@@ -145,7 +145,7 @@ const Login = () => {
           </div>
         </form>
         <div className="signup-text">
-          Don't have an account?<Link to="/register"><span>Sign Up here</span></Link>
+          Don&apos;t have an account?<Link to="/register"><span>Sign Up here</span></Link>
         </div>
       </div>
     </>

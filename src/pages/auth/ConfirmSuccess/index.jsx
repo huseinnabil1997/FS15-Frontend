@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import './confirmSuccess.css';
 import Header from '../../../components/Header';
 import confirmation_success from '../../../assets/confirmation_success.svg';
@@ -21,6 +21,7 @@ const ConfirmSucces = () => {
       setIsActivated(true); // set state isActivated ke true setelah berhasil
     } catch (err) {
       setError(err);
+      console.log(error)
     }
   }
 

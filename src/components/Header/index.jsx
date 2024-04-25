@@ -1,5 +1,3 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
 import './index.css';
 import Logo from '../../assets/logo.png';
 import Cart from '../../assets/cart.png';
@@ -7,6 +5,7 @@ import User from '../../assets/user.png';
 import Logout from '../../assets/logout.png';
 import { Stack } from '@mui/material';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom';
+import PropTypes from 'prop-types';
 
 const Header = ({ confirmSucces = false, homePage = false }) => {
   const history = useHistory();
@@ -52,3 +51,8 @@ const Header = ({ confirmSucces = false, homePage = false }) => {
 }
 
 export default Header;
+
+Header.propTypes = {
+  confirmSucces: PropTypes.bool,
+  homePage: PropTypes.bool
+};
