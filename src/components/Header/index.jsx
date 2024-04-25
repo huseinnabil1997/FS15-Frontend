@@ -5,9 +5,10 @@ import User from '../../assets/user.png';
 import Logout from '../../assets/logout.png';
 import { Stack } from '@mui/material';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom';
-import PropTypes from 'prop-types';
+import { useToken } from '../../utils/TokenContext';
 
-const Header = ({ confirmSucces = false, homePage = false }) => {
+const Header = () => {
+  const { token, removeToken } = useToken();
   const history = useHistory();
   return (
     <Stack width="100%" height="86px" position="absolute" top={0} direction="row" display="flex" justifyContent="space-between">
@@ -16,13 +17,13 @@ const Header = ({ confirmSucces = false, homePage = false }) => {
         <span>Otomobil</span>
       </div>
       <div className="nav">
-        {!confirmSucces && !homePage && (
+        {!token && (
           <>
             <button onClick={() => history.push('/register')} className="btn-signup">Sign Up</button>
             <button onClick={() => history.push('/login')} className="login">Login</button>
           </>
         )}
-        {homePage && (
+        {token && (
           <>
             <button className="icon_button" onClick={() => history.push('/checkout')}>
               <img src={Cart} alt="Cart" />
@@ -37,7 +38,7 @@ const Header = ({ confirmSucces = false, homePage = false }) => {
               className="icon_button"
               style={{ marginRight: 20 }}
               onClick={() => {
-                localStorage.removeItem('token');
+                removeToken()
                 history.push('/login');
               }}
             >
@@ -51,8 +52,3 @@ const Header = ({ confirmSucces = false, homePage = false }) => {
 }
 
 export default Header;
-
-Header.propTypes = {
-  confirmSucces: PropTypes.bool,
-  homePage: PropTypes.bool
-};
