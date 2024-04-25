@@ -1,11 +1,10 @@
-import { useEffect, useState } from 'react';
 import Footer from '../../components/Footer';
 import './homepage.css';
 import { Stack, Typography } from '@mui/material';
 import backgroundImage from '../../assets/driving_lessons.png'
 import personCarImage from '../../assets/person_car.png'
 import { Link, useLocation } from 'react-router-dom/cjs/react-router-dom';
-import axiosInstance from '../../utils/axiosInstance';
+import useAxios from '../hooks/useAxios';
 
 const lessonData = [
   {
@@ -23,36 +22,13 @@ const lessonData = [
 ]
 
 const Homepage = () => {
-  const [courses, setCourses] = useState([]);
-  const [categories, setCategories] = useState([]);
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const isHomepage = searchParams.get('isHomepage');
 
-  const getCourseData = async () => {
-    try {
-      const res = await axiosInstance.get('/Course/GetAll')
-      setCourses(res.data)
-      console.log('res getCourseData', res)
-    } catch (err) {
-      console.log('err getCourseData', err)
-    }
-  }
+  const { data: courses } = useAxios({ method: 'get', endpoint: '/Course/GetAll' });
 
-  const getCategoryData = async () => {
-    try {
-      const res = await axiosInstance.get('/CarCategory/GetAll')
-      setCategories(res.data)
-      console.log('res getCategoryData', res)
-    } catch (err) {
-      console.log('err getCategoryData', err)
-    }
-  }
-
-  useEffect(() => {
-    getCourseData();
-    getCategoryData();
-  }, [])
+  const { data: categories } = useAxios({ method: 'get', endpoint: '/CarCategory/GetAll' });
 
   const formatCurrency = (amount) => {
     return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
@@ -92,7 +68,7 @@ const Homepage = () => {
           </Typography>
         </Stack>
         <Stack direction="row">
-          {lessonData.map((data, index) => (
+          {lessonData?.map((data, index) => (
             <Stack
               key={index}
               spacing={3}
@@ -130,7 +106,7 @@ const Homepage = () => {
           Join us for the course
         </Typography>
         <Stack direction={{ sm: 'column', md: 'row' }} justifyContent="space-around" useFlexGap flexWrap="wrap">
-          {courses.map((data, index) => (
+          {courses?.map((data, index) => (
             <Link key={index} to={`/detail-class?isHomepage=${isHomepage}`}>
               <Stack sx={{ width: '350px', height: '400px', my: '10px' }}>
                 <img src={data.image_url} />
@@ -194,7 +170,7 @@ const Homepage = () => {
           Join us for the course
         </Typography>
         <Stack direction={{ sm: 'column', md: 'row' }} justifyContent="space-around" useFlexGap flexWrap="wrap" px="100px">
-          {categories.map((data, index) => (
+          {categories?.map((data, index) => (
             <Stack key={index} sx={{ display: 'flex', justifyContent: 'center', width: '200px', height: '200px', my: '10px', alignItems: 'center' }}>
               <Link to={`/menu-class?isHomepage=${isHomepage}&name=${data.category_name}`}>
                 <img src={data.image_url} alt={data.category_name} />
