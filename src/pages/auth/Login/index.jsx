@@ -5,8 +5,10 @@ import * as Yup from 'yup';
 import { useHistory, Link } from 'react-router-dom';
 import axiosInstance from '../../../utils/axiosInstance';
 import { useToken } from '../../../utils/TokenContext';
+import { useStore } from '../../../store';
 
 const Login = () => {
+  const { setToken, setUserId } = useStore();
   const { saveToken } = useToken();
   const [formData, setFormData] = useState({
     email: '',
@@ -28,14 +30,15 @@ const Login = () => {
   const getToken = async (email, password) => {
     try {
       const res = await axiosInstance.post('/User/Login', { email, password })
-      // localStorage.setItem('token', res.data.token);
+      setToken(res.data.token);
+      setUserId(res.data.userId);
       saveToken(res.data.token);
       history.push('/');
-        setErrors({
-          email: '',
-          password: '',
-          general: '',
-        });
+      setErrors({
+        email: '',
+        password: '',
+        general: '',
+      });
       return res.data.token;
     } catch (err) {
       setErrors({

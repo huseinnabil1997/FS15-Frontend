@@ -1,117 +1,58 @@
-import React from 'react';
-import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import KijangInova from '../../assets/kijang_inova.png';
-import HondaBrio from '../../assets/honda_brio.png';
-import HyundaiPalisade from '../../assets/hyundai_palisade.png';
-import CourseSuzukiXL7 from '../../assets/corola_suzuki.png';
-import MitsubishiPajero from '../../assets/mitsubishi_pajero.png';
-import PremiumMazda from '../../assets/PremiumMazdaCX5.png';
-import ToyotaFortuner from '../../assets/ToyotaFortuner.png';
-import DumpTruck from '../../assets/dump_truck.png';
-import HondaCivic from '../../assets/honda_civic.png';
-import Benefit from '../../assets/benefit.png';
-import Electric from '../../assets/electric.png';
-import Hatchback from '../../assets/hatchback.png';
-import Lcgc from '../../assets/lcgc.png';
-import Mpv from '../../assets/mpv.png';
-import Offroad from '../../assets/offroad.png';
-import Sedan from '../../assets/sedan.png';
-import Suv from '../../assets/suv.png';
-import Truck from '../../assets/truck.png';
 import './menuclass.css';
 import { useLocation } from 'react-router-dom/cjs/react-router-dom';
+import useAxios from '../hooks/useAxios';
+import { Stack, Typography } from '@mui/material';
 
 const MenuClass = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
+  const category_id = searchParams.get('category_id');
   const name = searchParams.get('name');
-  const miniBoxes = [
-    {
-      id: 1,
-      name: 'Electric',
-      img: Electric,
-    },
-    {
-      id: 2,
-      name: 'Hatchback',
-      img: Hatchback,
-    },
-    {
-      id: 3,
-      name: 'LCGC',
-      img: Lcgc,
-    },
-    {
-      id: 4,
-      name: 'MPV',
-      img: Mpv,
-    },
-    {
-      id: 5,
-      name: 'Offroad',
-      img: Offroad,
-    },
-    {
-      id: 6,
-      name: 'Sedan',
-      img: Sedan,
-    },
-    {
-      id: 7,
-      name: 'SUV',
-      img: Suv,
-    },
-    {
-      id: 8,
-      name: 'Truck',
-      img: Truck,
-    },
-  ];
-  const boxes = [
-    {
-      id: 1,
-      category: 'SUV',
-      name: 'Course SUV Kijang Innova',
-      price: 'IDR 700.000',
-      img: KijangInova,
-    },
-    {
-      id: 2,
-      category: 'SUV',
-      name: 'Hyundai Palisade 2021',
-      price: 'IDR 800.000',
-      img: HyundaiPalisade,
-    },
-    {
-      id: 3,
-      category: 'SUV',
-      name: 'Course Suzuki XL7',
-      price: 'IDR 600.000',
-      img: CourseSuzukiXL7,
-    },
-    {
-      id: 4,
-      category: 'SUV',
-      name: 'Course Mitsubishi Pajero',
-      price: 'IDR 800.000',
-      img: MitsubishiPajero,
-    },
-    {
-      id: 5,
-      category: 'SUV',
-      name: 'SUV Toyota Fortuner',
-      price: 'IDR 8500.000',
-      img: ToyotaFortuner,
-    },
-    {
-      id: 6,
-      category: 'SUV',
-      name: 'Premium Mazda CX-5 Course',
-      price: 'IDR 1.000.000',
-      img: PremiumMazda,
-    },
-  ];
+  const { data: courses } = useAxios({ method: 'get', endpoint: `/Course/GetAllByCategoryId?categoryId=${category_id}` });
+  //   {
+  //     id: 1,
+  //     category: 'SUV',
+  //     name: 'Course SUV Kijang Innova',
+  //     price: 'IDR 700.000',
+  //     img: KijangInova,
+  //   },
+  //   {
+  //     id: 2,
+  //     category: 'SUV',
+  //     name: 'Hyundai Palisade 2021',
+  //     price: 'IDR 800.000',
+  //     img: HyundaiPalisade,
+  //   },
+  //   {
+  //     id: 3,
+  //     category: 'SUV',
+  //     name: 'Course Suzuki XL7',
+  //     price: 'IDR 600.000',
+  //     img: CourseSuzukiXL7,
+  //   },
+  //   {
+  //     id: 4,
+  //     category: 'SUV',
+  //     name: 'Course Mitsubishi Pajero',
+  //     price: 'IDR 800.000',
+  //     img: MitsubishiPajero,
+  //   },
+  //   {
+  //     id: 5,
+  //     category: 'SUV',
+  //     name: 'SUV Toyota Fortuner',
+  //     price: 'IDR 8500.000',
+  //     img: ToyotaFortuner,
+  //   },
+  //   {
+  //     id: 6,
+  //     category: 'SUV',
+  //     name: 'Premium Mazda CX-5 Course',
+  //     price: 'IDR 1.000.000',
+  //     img: PremiumMazda,
+  //   },
+  // ];
   return (
     <>
       {/* <Header confirmSuccess={false} homePage={true} /> */}
@@ -128,18 +69,22 @@ const MenuClass = () => {
       <div className="joinCourseBox">
         <h1>Another favorite course</h1>
         <div className='boxListContainer'>
-          {boxes.map(({ img, category, name, price }) => (
-            <div className="boxList" key={img}>
-              <img src={img} alt={name} />
-              <p className='carCategory'>{category}</p>
-              <h2>{name}</h2>
+          {courses?.map(({ image_url, category_name, course_id, course_name, price }) => (
+            <div className="boxList" key={course_id}>
+              <img src={image_url} alt={course_name} />
+              <p className='carCategory'>{category_name}</p>
+              <h2>{course_name}</h2>
               <p className='carPrice'>{price}</p>
             </div>
             
           ))}
           
         </div>
-        
+        {courses?.length === 0 && (
+          <Stack>
+            <Typography>Kursus tidak ditemukan</Typography>
+          </Stack>
+        )}
       </div>
       <div className="benefitContainer">
         {/* Benefit content */}

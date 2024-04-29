@@ -3,7 +3,7 @@ import './homepage.css';
 import { Stack, Typography } from '@mui/material';
 import backgroundImage from '../../assets/driving_lessons.png'
 import personCarImage from '../../assets/person_car.png'
-import { Link, useLocation } from 'react-router-dom/cjs/react-router-dom';
+import { Link } from 'react-router-dom/cjs/react-router-dom';
 import useAxios from '../hooks/useAxios';
 
 const lessonData = [
@@ -22,9 +22,6 @@ const lessonData = [
 ]
 
 const Homepage = () => {
-  const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  const isHomepage = searchParams.get('isHomepage');
 
   const { data: courses } = useAxios({ method: 'get', endpoint: '/Course/GetAll' });
 
@@ -106,8 +103,8 @@ const Homepage = () => {
           Join us for the course
         </Typography>
         <Stack direction={{ sm: 'column', md: 'row' }} justifyContent="space-around" useFlexGap flexWrap="wrap">
-          {courses?.map((data, index) => (
-            <Link key={index} to={`/detail-class?isHomepage=${isHomepage}`}>
+          {courses?.map((data) => (
+            <Link key={courses.course_id} to={`/detail-class?course_id=${data.course_id}`}>
               <Stack sx={{ width: '350px', height: '400px', my: '10px' }}>
                 <img src={data.image_url} />
                 <Stack sx={{ height: '100%' }} display="flex" direction="column" justifyContent="space-between" p="15px">
@@ -172,7 +169,7 @@ const Homepage = () => {
         <Stack direction={{ sm: 'column', md: 'row' }} justifyContent="space-around" useFlexGap flexWrap="wrap" px="100px">
           {categories?.map((data, index) => (
             <Stack key={index} sx={{ display: 'flex', justifyContent: 'center', width: '200px', height: '200px', my: '10px', alignItems: 'center' }}>
-              <Link to={`/menu-class?isHomepage=${isHomepage}&name=${data.category_name}`}>
+              <Link to={`/menu-class?name=${data.category_name}&category_id=${data.category_id}`}>
                 <img src={data.image_url} alt={data.category_name} />
                 <Stack p="10px">
                   <Typography
