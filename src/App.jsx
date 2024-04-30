@@ -13,6 +13,7 @@ import DetailClass from './pages/DetailClass';
 import Checkout from './pages/Checkout';
 import Test from './test';
 import { TokenProvider } from './utils/TokenContext';
+import PruchaseSuccess from './pages/PurchaseSuccess';
 
 const paths = [
   {
@@ -56,6 +57,11 @@ const paths = [
   {
     pathName: '/checkout',
     compName: Checkout,
+
+  },
+  {
+    pathName: '/PurchaseSucces',
+    compName: PruchaseSuccess,
 
   },
   {
