@@ -82,7 +82,7 @@ const Checkout = () => {
     if (checkedItems.length === items.length) {
       setCheckedItems([]);
     } else {
-      setCheckedItems(items.map((item) => item.name));
+      setCheckedItems(items.map((item) => item.course_name));
     }
   };
 
