@@ -16,6 +16,7 @@ import { TokenProvider } from './utils/TokenContext';
 import PruchaseSuccess from './pages/PurchaseSuccess';
 import Invoice from './pages/Invoice';
 import InvoiceDetail from './pages/InvoiceDetail';
+import MyClass from './pages/myClass';
 
 const paths = [
   {
@@ -77,8 +78,8 @@ const paths = [
 
   },
   {
-    pathName: '/test',
-    compName: Test,
+    pathName: '/my-class',
+    compName: MyClass,
 
   },
 ]
