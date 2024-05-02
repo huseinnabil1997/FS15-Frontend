@@ -1,6 +1,6 @@
 import { Breadcrumbs, Stack, Typography } from '@mui/material';
 import Footer from '../../components/Footer';
-import SimpleTable from '../../components/Table';
+import SimpleTable from '../../components/Table/tableInvoice';
 import { Link } from 'react-router-dom';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 // import { useLocation } from 'react-router-dom/cjs/react-router-dom';

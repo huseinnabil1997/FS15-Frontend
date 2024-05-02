@@ -1,11 +1,24 @@
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button } from '@mui/material';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 
 function SimpleTable({ tableHead, tableItem }) {
+  const history = useHistory();
 
   const formatCurrency = (amount) => {
     return amount?.toString()?.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
   }
+
+  const handleClick = (row) => {
+    const data = {
+      no_invoice: row?.no_invoice,
+      date: row?.date,
+      total_course: row?.total_course,
+      total_price: row?.total_price
+    };
+    const queryString = encodeURIComponent(JSON.stringify(data));
+    history.push(`/invoice-detail?data=${queryString}`);
+  };
 
   return (
     <TableContainer component={Paper} sx={{ width: '90%' }}>
@@ -32,6 +45,7 @@ function SimpleTable({ tableHead, tableItem }) {
               <TableCell sx={{ color: '#4F4F4F', height: 77, fontFamily: 'Montserrat', fontSize: '16px', fontWeight: 500, width: row?.width }} align="center">IDR {formatCurrency(row?.total_price)}</TableCell>
               <TableCell sx={{ color: '#4F4F4F', height: 77, fontFamily: 'Montserrat', fontSize: '16px', fontWeight: 500, width: row?.width }} align="center">
                 <Button
+                  onClick={() => handleClick(row)}
                   variant='outlined'
                   sx={{
                     width: 130, height: 37, backgroundColor: 'white', borderColor: '#790B0A', textTransform: 'none', color: '#790B0A', fontFamily: 'Montserrat', fontWeight: 700, fontSize: '14px',
