@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import PropTypes from 'prop-types';
 import { Box, Button, Card, Checkbox, Divider, List, ListItem, Modal, Stack, Typography } from '@mui/material';
 import gopay from '../../assets/gopay.svg'
 import ovo from '../../assets/ovo.svg'
@@ -119,7 +120,7 @@ const Checkout = () => {
           </ListItem>
           <Divider />
           {items.map((item, index) => (
-            <Stack sx={{ px: 1 }}>
+            <Stack key={index} sx={{ px: 1 }}>
               <ListItem sx={{ py: 2 }} key={index} onClick={handleToggle(item.course_name)}>
                 <Checkbox
                   edge="start"
@@ -213,7 +214,7 @@ const MyModal = ({ open, handleClose }) => {
       >
         <Typography mb={5} fontSize="20px" fontWeight={500} color="#41454D" fontFamily="Poppins">Select Payment Method</Typography>
         {payments?.map((item) => (
-          <Stack my={1} sx={{ width: '100%', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start' }}>
+          <Stack key={item?.name} my={1} sx={{ width: '100%', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start' }}>
             <Box
               onClick={() => setPayment(item?.name)}
               component="img"
@@ -255,4 +256,9 @@ const MyModal = ({ open, handleClose }) => {
       </Card>
     </Modal>
   );
+};
+
+MyModal.propTypes = {
+  open: PropTypes.bool,
+  handleClose: PropTypes.func,
 };

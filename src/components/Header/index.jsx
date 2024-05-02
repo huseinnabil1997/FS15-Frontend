@@ -28,8 +28,8 @@ const Header = () => {
             <button className="icon_button" onClick={() => history.push('/checkout')}>
               <img src={Cart} alt="Cart" />
             </button>
-            <button className="button_header">My Class</button>
-            <button className="button_header">Invoice</button>
+            <button className="button_header" onClick={() => history.push('/myClass')}>My Class</button>
+            <button className="button_header" onClick={() => history.push('/invoice')}>Invoice</button>
             <div className="separator" />
             <button className="icon_button" style={{ marginLeft: 20, marginRight: 20 }} onClick={() => console.log("User clicked")}>
               <img src={User} alt="User" />

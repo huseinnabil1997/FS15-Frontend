@@ -1,6 +1,4 @@
 import { Box, Button, Stack, Typography } from '@mui/material';
-import React from 'react';
-import { useLocation } from 'react-router-dom/cjs/react-router-dom';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import HomeIcon from '@mui/icons-material/Home';
 import confirmation_success from '../../assets/confirmation_success.svg';
@@ -8,11 +6,7 @@ import { useHistory } from 'react-router-dom';
 
 
 const PruchaseSuccess = () => {
-  const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
   const history = useHistory();
-
-  const payment = searchParams.get('payment');
 
   return (
     <Stack sx={{ width: '100vw', height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
@@ -43,6 +37,7 @@ const PruchaseSuccess = () => {
         </Button>
         <Button
           startIcon={<ArrowForwardIcon />}
+          onClick={() => history.push('/invoice')}
           variant="contained"
           sx={{
             '&:hover': {

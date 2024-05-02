@@ -14,6 +14,7 @@ import Checkout from './pages/Checkout';
 import Test from './test';
 import { TokenProvider } from './utils/TokenContext';
 import PruchaseSuccess from './pages/PurchaseSuccess';
+import Invoice from './pages/Invoice';
 
 const paths = [
   {
@@ -62,6 +63,11 @@ const paths = [
   {
     pathName: '/PurchaseSucces',
     compName: PruchaseSuccess,
+
+  },
+  {
+    pathName: '/invoice',
+    compName: Invoice,
 
   },
   {
