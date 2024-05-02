@@ -8,6 +8,7 @@ import mandiri from '../../assets/mandiri.svg'
 import bca from '../../assets/bca.svg'
 import bni from '../../assets/bni.svg'
 import { useHistory } from 'react-router-dom';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 // https://drive.google.com/thumbnail?id=1lfQf6P0nLZVZgTizBlyWlQt5XhrWFOvp
 
@@ -121,34 +122,37 @@ const Checkout = () => {
           <Divider />
           {items.map((item, index) => (
             <Stack key={index} sx={{ px: 1 }}>
-              <ListItem sx={{ py: 2 }} key={index} onClick={handleToggle(item.course_name)}>
-                <Checkbox
-                  edge="start"
-                  checked={checkedItems.indexOf(item.course_name) !== -1}
-                  tabIndex={-1}
-                  disableRipple
-                  sx={{
-                    color: '#790B0A',
-                    '&.Mui-checked': {
-                      color: '#790B0A',
-                    },
-                  }}
-                />
-                <Stack direction="row">
-                  <Box
-                    component="img"
-                    sx={{
-                      height: 134,
-                      width: 200,
-                    }}
-                    src={item?.image_url}
-                  />
-                  <Stack mx={3} spacing={1} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                    <Typography fontSize="16px" fontWeight={400} color="#828282" fontFamily="Montserrat">{item?.category_name}</Typography>
-                    <Typography fontSize="24px" fontWeight={600} color="#333333" fontFamily="Montserrat">{item?.course_name}</Typography>
-                    <Typography fontSize="16px" fontWeight={400} color="#4F4F4F" fontFamily="Montserrat">Schedule : {item?.schedule}</Typography>
-                    <Typography fontSize="20px" fontWeight={600} color="#790B0A" fontFamily="Montserrat">IDR {formatCurrency(item?.price)}</Typography>
+              <ListItem sx={{ py: 2 }} key={index}>
+                <Stack direction="row" justifyContent="space-between" alignItems="center" flexGrow={1}>
+                  <Stack direction="row" onClick={handleToggle(item.course_name)}>
+                    <Checkbox
+                      edge="start"
+                      checked={checkedItems.indexOf(item.course_name) !== -1}
+                      tabIndex={-1}
+                      disableRipple
+                      sx={{
+                        color: '#790B0A',
+                        '&.Mui-checked': {
+                          color: '#790B0A',
+                        },
+                      }}
+                    />
+                    <Box
+                      component="img"
+                      sx={{
+                        height: 134,
+                        width: 200,
+                      }}
+                      src={item?.image_url}
+                    />
+                    <Stack mx={3} spacing={1} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                      <Typography fontSize="16px" fontWeight={400} color="#828282" fontFamily="Montserrat">{item?.category_name}</Typography>
+                      <Typography fontSize="24px" fontWeight={600} color="#333333" fontFamily="Montserrat">{item?.course_name}</Typography>
+                      <Typography fontSize="16px" fontWeight={400} color="#4F4F4F" fontFamily="Montserrat">Schedule : {item?.schedule}</Typography>
+                      <Typography fontSize="20px" fontWeight={600} color="#790B0A" fontFamily="Montserrat">IDR {formatCurrency(item?.price)}</Typography>
+                    </Stack>
                   </Stack>
+                  <DeleteForeverIcon onClick={() => console.log('delete clicked')} sx={{ height: 30, width: 30, color: '#EB5757' }} />
                 </Stack>
               </ListItem>
               <Divider />
