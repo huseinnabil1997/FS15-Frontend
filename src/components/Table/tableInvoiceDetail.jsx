@@ -1,6 +1,5 @@
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 import PropTypes from 'prop-types';
-import { useHistory } from 'react-router-dom';
 
 function SimpleTable({ tableHead, tableItem }) {
 
