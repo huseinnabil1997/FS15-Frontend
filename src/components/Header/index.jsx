@@ -12,7 +12,7 @@ const Header = () => {
   const history = useHistory();
   return (
     <Stack width="100%" height="86px" position="absolute" top={0} direction="row" display="flex" justifyContent="space-between">
-      <div className="logo">
+      <div className="logo" onClick={() => history.push('/')}>
         <img src={Logo} alt="Logo" />
         <span>Otomobil</span>
       </div>
